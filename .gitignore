@@ -2,6 +2,8 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+/Game Engine Group Assignment/Library/
+/Game Engine Group Assignment/Temp/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
