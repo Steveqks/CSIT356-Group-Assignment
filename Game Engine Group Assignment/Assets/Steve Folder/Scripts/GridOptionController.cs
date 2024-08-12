@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class GridOptionController : MonoBehaviour
 {
-    [SerializeField] GameObject option;
+    private GameObject option;
+    public GridSelectorController selector;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        option = gameObject;
     }
 
     // Update is called once per frame
@@ -20,8 +21,9 @@ public class GridOptionController : MonoBehaviour
 
     public void OnOpenSettings()
     {
+        selector.setGridActive(gameObject);
         // display the settings popup
-        option.gameObject.SetActive(true);
+        //option.gameObject.SetActive(true);
 
         Debug.Log("grid>options>open");
     }
@@ -43,4 +45,6 @@ public class GridOptionController : MonoBehaviour
     {
         Debug.Log("grid > build");
     }
+
+
 }
