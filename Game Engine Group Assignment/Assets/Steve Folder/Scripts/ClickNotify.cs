@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Notify : MonoBehaviour
+//for UI
+using UnityEngine.UI;
+
+
+public class ClickNotify : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +23,7 @@ public class Notify : MonoBehaviour
 
     public void NotifyMSG()
     {
-        Debug.Log("clicked");
+        Debug.Log("Game Obj: " + gameObject + " clicked");
     }
+
 }
