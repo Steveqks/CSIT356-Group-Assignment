@@ -21,28 +21,6 @@ public class GridSelectorController : MonoBehaviour
         
     }
 
-    public void changeSelector()
-    {
-
-        gameObject.SetActive(false);
-
-        //Debug.Log("GridActivate grid: " + GridActivate);
-
-        if (GridCurrent == null)
-        {
-            //GridActivate.gameObject.SetActive(true);
-            //GridCurrent = GridActivate.gameObject;
-            
-
-        }
-        else
-        {
-            //GridCurrent.SetActive(false);
-            //GridActivate.gameObject.SetActive(true);
-        }
-
-    }
-
     public void setGridActive(GameObject obj)
     {
         if (GridDeactivate != null)

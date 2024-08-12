@@ -19,7 +19,8 @@ public class GridOptionController : MonoBehaviour
         
     }
 
-    public void OnOpenSettings()
+    //to open layer 1 options
+    public void OnOpenLayer1Options()
     {
         selector.setGridActive(gameObject);
         // display the settings popup
@@ -28,7 +29,17 @@ public class GridOptionController : MonoBehaviour
         Debug.Log("grid>options>open");
     }
 
-    public void OnCloseSettings()
+    //to open layer 1 options
+    public void OnOpenLayer2Options()
+    {
+        selector.setGridActive(gameObject);
+        // display the settings popup
+        //option.gameObject.SetActive(true);
+
+        Debug.Log("grid>options>layer2");
+    }
+
+    public void OnCloseOptions()
     {
         // don't display the settings popup
         option.gameObject.SetActive(false);
@@ -41,10 +52,28 @@ public class GridOptionController : MonoBehaviour
         Debug.Log("grid > sell");
     }
 
-    public void onBuild()
+    public void onBuildOptions()
     {
+        Debug.Log(gameObject.transform.Find("Build_options"));
+        Debug.Log(gameObject.transform.Find("Build"));
+        selector.setGridActive(transform.Find("Build_options").gameObject);
+        //selector.setGridActive(gameObject);
         Debug.Log("grid > build");
     }
 
+    public void onBuild1()
+    {
+        Debug.Log("grid > build1");
+    }
+
+    public void onBuild2()
+    {
+        Debug.Log("grid > build2");
+    }
+
+    public void onBuild3()
+    {
+        Debug.Log("grid > build3");
+    }
 
 }
