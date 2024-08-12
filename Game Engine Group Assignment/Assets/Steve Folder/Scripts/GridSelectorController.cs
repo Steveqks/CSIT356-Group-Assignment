@@ -23,21 +23,16 @@ public class GridSelectorController : MonoBehaviour
 
     public void setGridActive(GameObject obj)
     {
+        //check if any active previously
         if (GridDeactivate != null)
         {
+            //deactivate previously opened option
             GridDeactivate.SetActive(false);
         }
 
-        Debug.Log("this game obj: " + obj);
-
+        //display new selected option 
         obj.SetActive(true);
 
         GridDeactivate = obj;
-        /*
-        obj.transform.gameObject.SetActive(true);
-        Debug.Log("msg gameObject is: " + obj);
-        Debug.Log("is true");
-            //.gameObject.SetActive(true);
-        */
     }
 }
