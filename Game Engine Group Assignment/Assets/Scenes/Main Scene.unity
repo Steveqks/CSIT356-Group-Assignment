@@ -517,12 +517,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panSpeed: 5
-  viewLimit: {x: 20, y: 20}
+  panLimit: {x: 10, y: 10}
+  minZoom: 15
+  maxZoom: 80
   zoomSpeed: 5
   scrollSpeed: 50
   smooth: 0.25
-  minZoom: 15
-  maxZoom: 80
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
