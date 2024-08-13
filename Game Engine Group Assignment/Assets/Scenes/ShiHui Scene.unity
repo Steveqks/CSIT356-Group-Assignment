@@ -5592,7 +5592,7 @@ PrefabInstance:
     - target: {fileID: 5007338535288114898, guid: a9f92d5b9f428034d8afe28b4cc8a9d7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.82
+      value: -23
       objectReference: {fileID: 0}
     - target: {fileID: 5007338535288114898, guid: a9f92d5b9f428034d8afe28b4cc8a9d7,
         type: 3}
@@ -5733,6 +5733,10 @@ PrefabInstance:
     - target: {fileID: 6163660225915574, guid: f3cbdad3ea5b54e4cba085d8262c9dbe, type: 3}
       propertyPath: m_Name
       value: End Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163660225915574, guid: f3cbdad3ea5b54e4cba085d8262c9dbe, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2233877301642585477, guid: f3cbdad3ea5b54e4cba085d8262c9dbe,
         type: 3}
@@ -6038,6 +6042,10 @@ PrefabInstance:
     - target: {fileID: 6163660225915574, guid: f3cbdad3ea5b54e4cba085d8262c9dbe, type: 3}
       propertyPath: m_Name
       value: End Grid (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163660225915574, guid: f3cbdad3ea5b54e4cba085d8262c9dbe, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2233877301642585477, guid: f3cbdad3ea5b54e4cba085d8262c9dbe,
         type: 3}
@@ -6770,6 +6778,10 @@ PrefabInstance:
     - target: {fileID: 6163660225915574, guid: f3cbdad3ea5b54e4cba085d8262c9dbe, type: 3}
       propertyPath: m_Name
       value: Start Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163660225915574, guid: f3cbdad3ea5b54e4cba085d8262c9dbe, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2233877301642585477, guid: f3cbdad3ea5b54e4cba085d8262c9dbe,
         type: 3}
@@ -8913,6 +8925,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Start Grid (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6163660225915574, guid: f3cbdad3ea5b54e4cba085d8262c9dbe, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2233877301642585477, guid: f3cbdad3ea5b54e4cba085d8262c9dbe,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10477,7 +10493,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.1666667
+  m_VoxelSize: 0.01
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: cba7c114d7397c54eac18244d6de59e6, type: 2}
   m_BuildHeightMesh: 0
