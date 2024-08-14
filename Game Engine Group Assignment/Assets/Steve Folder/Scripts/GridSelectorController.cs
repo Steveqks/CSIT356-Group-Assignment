@@ -9,6 +9,11 @@ public class GridSelectorController : MonoBehaviour
     Transform GridActivate;
     GameObject GridDeactivate;
 
+
+    [SerializeField] GameObject OptionL1;
+    [SerializeField] GameObject OptionL2;
+    [SerializeField] GameObject Canvas1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,5 +39,23 @@ public class GridSelectorController : MonoBehaviour
         obj.SetActive(true);
 
         GridDeactivate = obj;
+    }
+
+    public void setLayer1()
+    {
+        OptionL1.SetActive(true);
+    }
+
+    public void setLayer2()
+    {
+        OptionL1.SetActive(false);
+        OptionL2.SetActive(true);
+    }
+
+    public void closeOption()
+    {
+        OptionL2.SetActive(false);
+        OptionL1.SetActive(true);
+        Canvas1.SetActive(false);
     }
 }
