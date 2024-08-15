@@ -52,9 +52,6 @@ public class TileInfoOptionController : MonoBehaviour
 
         Debug.Log("on build1");
 
-
-
-        Debug.Log(ti);
         instantiatedTower = Instantiate(tower1, ti.GetTransform(), Quaternion.identity); 
         ti.setTowerModel(instantiatedTower);
     }
@@ -67,8 +64,10 @@ public class TileInfoOptionController : MonoBehaviour
 
         ti.setTileinfo("Cannons");
 
-        Debug.Log(ti);
         Debug.Log("on build2");
+
+        instantiatedTower = Instantiate(tower2, ti.GetTransform(), Quaternion.identity);
+        ti.setTowerModel(instantiatedTower);
 
     }
 
@@ -80,8 +79,10 @@ public class TileInfoOptionController : MonoBehaviour
 
         ti.setTileinfo("Sniper");
 
-        Debug.Log(ti);
         Debug.Log("on build3");
+
+        instantiatedTower = Instantiate(tower3, ti.GetTransform(), Quaternion.identity);
+        ti.setTowerModel(instantiatedTower);
     }
 
 }
