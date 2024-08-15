@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class TileSelectorController : MonoBehaviour
 {
+    // options background
+    [SerializeField] GameObject Options;
+
+    // options layer 1
     [SerializeField] GameObject OptionL1;
+
+    // options layer 2
     [SerializeField] GameObject OptionL2;
-    [SerializeField] GameObject Canvas1;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +42,6 @@ public class TileSelectorController : MonoBehaviour
     {
         OptionL2.SetActive(false);
         OptionL1.SetActive(true);
-        Canvas1.SetActive(false);
+        Options.SetActive(false);
     }
 }

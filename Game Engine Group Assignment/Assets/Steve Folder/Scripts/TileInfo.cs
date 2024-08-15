@@ -37,7 +37,7 @@ public class TileInfo : MonoBehaviour
         return this;
     }
 
-    public void setTowerModel(GameObject obj)
+    public void instantiateTowerModel(GameObject obj)
     {
         instantiatedTower = obj;
     }

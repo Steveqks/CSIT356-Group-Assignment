@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class TileOption : MonoBehaviour
 {
+    // used to store tower type
     public string towertype;
+
+    // TMP_Text for displaying title
     public TMP_Text tiletitle;
+
+    // TileInfo obj...
     public TileInfo tileInfo;
 
     // store current position of selected tower
@@ -48,9 +53,9 @@ public class TileOption : MonoBehaviour
         return tilePosition.position;
     }
 
-    public void setTowerModel(GameObject obj)
+    public void instantiateTowerModel(GameObject obj)
     {
-        tileInfo.setTowerModel(obj);
+        tileInfo.instantiateTowerModel(obj);
     }
 
     public void destroyTowerModel()

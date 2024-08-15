@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TileClickHandler : MonoBehaviour
 {
-    //
+    // for opening layer1 layer2 options
     public TileSelectorController selector;
 
-    //???
-    public GameObject selectTile;
+    // options background
+    public GameObject options;
 
     // selecting layer 1 options
     public GameObject optionL1;
@@ -16,8 +16,8 @@ public class TileClickHandler : MonoBehaviour
     // selecting layer 2 options
     public GameObject optionL2;
 
-    //?
-    public TileInfo tileInfo;
+    // used to store which tile selected for reference
+    private TileInfo tileInfo;
 
     // for Tile Options Menu
     public TileOption tileOption;
@@ -45,7 +45,7 @@ public class TileClickHandler : MonoBehaviour
 
         optionL1.SetActive(true);
         optionL2.SetActive(false);
-        selectTile.SetActive(true);
+        options.SetActive(true);
         
         tileInfo = GetComponent<TileInfo>();
 
