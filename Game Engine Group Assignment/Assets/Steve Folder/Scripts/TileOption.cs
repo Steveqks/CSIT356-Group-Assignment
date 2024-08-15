@@ -57,4 +57,9 @@ public class TileOption : MonoBehaviour
     {
         tileInfo.destroyTowerModel();
     }
+
+    public bool isTowerInstantiate()
+    {
+        return tileInfo.isTowerInstantiate();
+    }
 }

@@ -35,10 +35,10 @@ public class TileInfoOptionController : MonoBehaviour
 
         ti.setTileinfo("empty");
 
-        Debug.Log(ti);
         Debug.Log("on sell");
 
         ti.destroyTowerModel();
+
         
     }
 
@@ -48,12 +48,17 @@ public class TileInfoOptionController : MonoBehaviour
 
         TileOption ti = tileInfo.GetComponent<TileOption>();
 
-        ti.setTileinfo("Arrows");
+        if (!ti.isTowerInstantiate())
+        {
+            ti.setTileinfo("Arrows");
 
-        Debug.Log("on build1");
+            Debug.Log("on build1");
 
-        instantiatedTower = Instantiate(tower1, ti.GetTransform(), Quaternion.identity); 
-        ti.setTowerModel(instantiatedTower);
+            instantiatedTower = Instantiate(tower1, ti.GetTransform(), Quaternion.identity);
+            ti.setTowerModel(instantiatedTower);
+        }
+        else Debug.Log("Tile already occupied by a tower, sell a tower first");
+
     }
 
     public void onBuild2()
@@ -62,13 +67,18 @@ public class TileInfoOptionController : MonoBehaviour
 
         TileOption ti = tileInfo.GetComponent<TileOption>();
 
-        ti.setTileinfo("Cannons");
 
-        Debug.Log("on build2");
 
-        instantiatedTower = Instantiate(tower2, ti.GetTransform(), Quaternion.identity);
-        ti.setTowerModel(instantiatedTower);
+        if (!ti.isTowerInstantiate())
+        {
+            ti.setTileinfo("Cannons");
 
+            Debug.Log("on build2");
+
+            instantiatedTower = Instantiate(tower2, ti.GetTransform(), Quaternion.identity);
+            ti.setTowerModel(instantiatedTower);
+        }
+        else Debug.Log("Tile already occupied by a tower, sell a tower first");
     }
 
     public void onBuild3()
@@ -77,12 +87,18 @@ public class TileInfoOptionController : MonoBehaviour
 
         TileOption ti = tileInfo.GetComponent<TileOption>();
 
-        ti.setTileinfo("Sniper");
 
-        Debug.Log("on build3");
 
-        instantiatedTower = Instantiate(tower3, ti.GetTransform(), Quaternion.identity);
-        ti.setTowerModel(instantiatedTower);
+        if (!ti.isTowerInstantiate())
+        {
+            ti.setTileinfo("Sniper");
+
+            Debug.Log("on build3");
+
+            instantiatedTower = Instantiate(tower3, ti.GetTransform(), Quaternion.identity);
+            ti.setTowerModel(instantiatedTower);
+        }
+        else Debug.Log("Tile already occupied by a tower, sell a tower first");
     }
 
 }

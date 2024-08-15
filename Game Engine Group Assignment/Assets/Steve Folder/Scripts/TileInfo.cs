@@ -46,4 +46,9 @@ public class TileInfo : MonoBehaviour
     {
         Destroy(instantiatedTower);
     }
+
+    public bool isTowerInstantiate()
+    {
+        return instantiatedTower != null;   
+    }
 }
