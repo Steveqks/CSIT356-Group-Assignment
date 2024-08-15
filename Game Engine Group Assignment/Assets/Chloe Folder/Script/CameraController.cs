@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 	// speed of camera movement
 	public float panSpeed = 5.0f;
 	// limit the panning
-	public Vector2 viewLimit;
+	public Vector2 panLimit;
 
 	// for camera zoom
 	public float zoomSpeed = 5.0f;
