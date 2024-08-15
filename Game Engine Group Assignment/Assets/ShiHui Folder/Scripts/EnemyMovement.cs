@@ -4,8 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
-{     
+public class EnemyMovement : MonoBehaviour
+{
     public Transform[] waypoints;
     [SerializeField] private float minDistance = 0.5f;
     private int currentWaypoint = 0;
@@ -30,8 +30,9 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        //agent.SetDestination(waypoints[currentWaypoint].position);
     }
-    
+
     private void Update()
     {
         SetWaypoints(waypoints);
@@ -77,7 +78,6 @@ public class Enemy : MonoBehaviour
             Debug.Log(this.gameObject.name + " - reach the last waypoint");
             Destroy(this.gameObject);
         }
-
     }
 
     Vector3 Seek()
@@ -89,10 +89,11 @@ public class Enemy : MonoBehaviour
             toTarget.y = 0;
             Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
             return (desiredVelocity - currentVelocity);
-        } else
-        {
-            return Vector3.zero; 
         }
-    } 
+        else
+        {
+            return Vector3.zero;
+        }
+    }
 
 }
