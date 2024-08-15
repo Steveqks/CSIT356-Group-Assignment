@@ -7,6 +7,9 @@ public class TileInfo : MonoBehaviour
 {
     public string towertype;
 
+    // store instance of instantiated tower
+    GameObject instantiatedTower;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,4 +37,13 @@ public class TileInfo : MonoBehaviour
         return this;
     }
 
+    public void setTowerModel(GameObject obj)
+    {
+        instantiatedTower = obj;
+    }
+
+    public void destroyTowerModel()
+    {
+        Destroy(instantiatedTower);
+    }
 }

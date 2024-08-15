@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class TileInfoOptionController : MonoBehaviour
 {
     public TileSelectorController selector;
+
+    public GameObject tower1;
+    public GameObject tower2;
+    public GameObject tower3;
+
+    public GameObject instantiatedTower;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +36,10 @@ public class TileInfoOptionController : MonoBehaviour
         ti.setTileinfo("empty");
 
         Debug.Log(ti);
-        //gi.SetTowerType("ARROWS");
         Debug.Log("on sell");
+
+        ti.destroyTowerModel();
+        
     }
 
     public void onBuild1()
@@ -40,10 +50,13 @@ public class TileInfoOptionController : MonoBehaviour
 
         ti.setTileinfo("Arrows");
 
-        Debug.Log(ti);
-        //gi.SetTowerType("ARROWS");
         Debug.Log("on build1");
 
+
+
+        Debug.Log(ti);
+        instantiatedTower = Instantiate(tower1, ti.GetTransform(), Quaternion.identity); 
+        ti.setTowerModel(instantiatedTower);
     }
 
     public void onBuild2()
@@ -55,7 +68,6 @@ public class TileInfoOptionController : MonoBehaviour
         ti.setTileinfo("Cannons");
 
         Debug.Log(ti);
-        //gi.SetTowerType("ARROWS");
         Debug.Log("on build2");
 
     }
@@ -69,7 +81,6 @@ public class TileInfoOptionController : MonoBehaviour
         ti.setTileinfo("Sniper");
 
         Debug.Log(ti);
-        //gi.SetTowerType("ARROWS");
         Debug.Log("on build3");
     }
 
