@@ -10,12 +10,13 @@ public class CameraController : MonoBehaviour
 	public Vector2 panLimit;
 
 	// for camera zoom
+	public float minZoom = 15.0f;
+	public float maxZoom = 80.0f;
 	public float zoomSpeed = 5.0f;
 	public float scrollSpeed = 50.0f;
 	public float smooth = 0.25f;
-	public float minZoom = 15.0f;
-	public float maxZoom = 80.0f;
 	private Vector3 velocity = Vector3.zero;
+	private float multiplier = 100.0f;
 
 	void Update()
 	{
@@ -76,6 +77,6 @@ public class CameraController : MonoBehaviour
 
 	float AddSpeed(float speed)
 	{
-		return speed * Time.deltaTime;
+		return speed * multiplier * Time.deltaTime;
 	}
 }
