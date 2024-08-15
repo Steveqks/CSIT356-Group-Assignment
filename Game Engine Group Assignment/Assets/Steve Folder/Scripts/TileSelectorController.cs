@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GridSelectorController : MonoBehaviour
+public class TileSelectorController : MonoBehaviour
 {
-    GameObject GridCurrent;
-    Transform GridActivate;
-    GameObject GridDeactivate;
-
-
     [SerializeField] GameObject OptionL1;
     [SerializeField] GameObject OptionL2;
     [SerializeField] GameObject Canvas1;
@@ -26,20 +21,6 @@ public class GridSelectorController : MonoBehaviour
         
     }
 
-    public void setGridActive(GameObject obj)
-    {
-        //check if any active previously
-        if (GridDeactivate != null)
-        {
-            //deactivate previously opened option
-            GridDeactivate.SetActive(false);
-        }
-
-        //display new selected option 
-        obj.SetActive(true);
-
-        GridDeactivate = obj;
-    }
 
     public void setLayer1()
     {
