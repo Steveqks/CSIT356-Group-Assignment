@@ -38,6 +38,12 @@ public class TileSelectorController : MonoBehaviour
         OptionL2.SetActive(true);
     }
 
+    public void backButton()
+    {
+        OptionL2.SetActive(false);
+        OptionL1.SetActive(true);
+    }
+
     public void closeOption()
     {
         OptionL2.SetActive(false);
