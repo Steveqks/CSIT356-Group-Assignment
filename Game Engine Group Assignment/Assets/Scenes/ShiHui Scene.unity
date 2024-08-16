@@ -478,6 +478,58 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 740250607}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &312506004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 312506006}
+  - component: {fileID: 312506005}
+  m_Layer: 0
+  m_Name: Air Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &312506005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312506004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08c018a4ce2551418e7c4eee15326f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 2537754609540530137, guid: 0eddf5b92c13ef04cb35c91e3628646e,
+    type: 3}
+  waypoints:
+  - {fileID: 1874137436}
+  - {fileID: 1280385174}
+  - {fileID: 380113585}
+  - {fileID: 163158351}
+  - {fileID: 1928996796}
+--- !u!4 &312506006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312506004}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.6, y: 4.28, z: 7.74}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &315082090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -809,6 +861,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Slow
       objectReference: {fileID: 0}
+    - target: {fileID: 2537754609540530137, guid: 0eddf5b92c13ef04cb35c91e3628646e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -916,6 +973,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Fast
+      objectReference: {fileID: 0}
+    - target: {fileID: 964689735626388169, guid: b72cdbb58be81154f90b444291503fe3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2081810393186653558, guid: b72cdbb58be81154f90b444291503fe3,
         type: 3}
@@ -1084,6 +1146,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Slow (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537754609540530137, guid: 0eddf5b92c13ef04cb35c91e3628646e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1481,7 +1548,7 @@ Transform:
   m_GameObject: {fileID: 1309122240}
   serializedVersion: 2
   m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 20.5, z: -26.6}
+  m_LocalPosition: {x: 0.34, y: 21.2, z: -21.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1651,6 +1718,58 @@ Transform:
   - {fileID: 1601259812}
   - {fileID: 1403738395}
   - {fileID: 1595975980}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1356626895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356626897}
+  - component: {fileID: 1356626896}
+  m_Layer: 0
+  m_Name: Ground Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1356626896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356626895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08c018a4ce2551418e7c4eee15326f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 964689735626388169, guid: b72cdbb58be81154f90b444291503fe3,
+    type: 3}
+  waypoints:
+  - {fileID: 1469244546}
+  - {fileID: 1864319259}
+  - {fileID: 1176948922}
+  - {fileID: 217367319}
+  - {fileID: 1226716518}
+--- !u!4 &1356626897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356626895}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.6, y: 0.86, z: 7.74}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1403738395 stripped
@@ -2832,6 +2951,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Fast (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 964689735626388169, guid: b72cdbb58be81154f90b444291503fe3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2081810393186653558, guid: b72cdbb58be81154f90b444291503fe3,
         type: 3}
       propertyPath: waypoints.Array.data[0]
@@ -3009,3 +3133,5 @@ SceneRoots:
   - {fileID: 406266209}
   - {fileID: 2092119589}
   - {fileID: 854153910}
+  - {fileID: 1356626897}
+  - {fileID: 312506006}

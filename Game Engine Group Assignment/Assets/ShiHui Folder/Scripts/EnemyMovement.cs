@@ -11,11 +11,7 @@ public class EnemyMovement : MonoBehaviour
     private int currentWaypoint = 0;
     private NavMeshAgent agent;
 
-    //public Transform target;
-    //bool hasTarget = false;
-
     public float maxSpeed = 10.0f;
-    //public float rotSpeed = 5.0f;
 
     float mass = 1.0f;
     Vector3 currentVelocity = Vector3.zero;
@@ -30,7 +26,6 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        //agent.SetDestination(waypoints[currentWaypoint].position);
     }
 
     private void Update()
@@ -70,7 +65,6 @@ public class EnemyMovement : MonoBehaviour
                 {
                     transform.rotation = Quaternion.LookRotation(currentVelocity);
                 }
-
             }
         }
         else
