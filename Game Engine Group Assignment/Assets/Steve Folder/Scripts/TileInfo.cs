@@ -27,7 +27,7 @@ public class TileInfo : MonoBehaviour
         towertype = str;
     }
 
-    public string getGridTowerType()
+    public string getTileTowerType()
     {
         return towertype;
     }

@@ -34,7 +34,8 @@ public class TileOption : MonoBehaviour
 
     public void loadStatus(TileInfo ti)
     {
-        this.towertype = ti.getGridTowerType();
+        this.towertype = ti.getTileTowerType();
+
         tiletitle.text = this.towertype;
 
         tileInfo = ti;
@@ -66,5 +67,10 @@ public class TileOption : MonoBehaviour
     public bool isTowerInstantiate()
     {
         return tileInfo.isTowerInstantiate();
+    }
+
+    public string getTileTowerType()
+    {
+        return tileInfo.getTileTowerType();
     }
 }
