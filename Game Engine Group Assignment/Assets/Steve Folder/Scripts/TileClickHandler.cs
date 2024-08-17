@@ -19,7 +19,7 @@ public class TileClickHandler : MonoBehaviour
     // used to store which tile selected for reference
     private TileInfo tileInfo;
 
-    // for Tile Options Menu
+    // for Tile Options Menu, for storing temporary information.
     public TileOption tileOption;
 
     // Start is called before the first frame update

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEditor.PackageManager;
@@ -31,13 +32,37 @@ public class TileInfoOptionController : MonoBehaviour
     {
         Transform tileInfo = transform.parent.parent;
 
-        TileOption ti = tileInfo.GetComponent<TileOption>();
+        TileOption to = tileInfo.GetComponent<TileOption>();
 
-        ti.setTileinfo("empty");
 
+        // retreive tile tower info
+        if(to.getTileTowerType() == "Arrows")
+        {
+            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
+            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
+            ps.itemSold(5);
+        }
+
+        else if (to.getTileTowerType() == "Cannons")
+        {
+            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
+            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
+            ps.itemSold(7);
+        }
+
+        else if (to.getTileTowerType() == "Sniper")
+        {
+            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
+            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
+            ps.itemSold(10);
+        }
+        
+        Debug.Log("123tower type is: " + to.getTileTowerType());
         Debug.Log("on sell");
 
-        ti.destroyTowerModel();
+        to.setTileinfo("empty");
+
+        to.destroyTowerModel();
 
         
     }
