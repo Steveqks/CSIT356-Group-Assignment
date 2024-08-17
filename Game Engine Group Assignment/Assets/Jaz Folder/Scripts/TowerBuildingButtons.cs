@@ -5,10 +5,14 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NewBehaviourScript : MonoBehaviour
+public class TowerBuildingButtons : MonoBehaviour
 {
-    public GameObject towerPrefab;
-    public Button buildButton;
+    public GameObject arrowTowerPrefab;
+    public Button buildArrowTowerButton;
+
+    public GameObject gatlingTowerPrefab;
+    public Button buildGatlingTowerButton;
+
     public Transform interactiveGrid;
     public Button sellButton;
 
@@ -17,7 +21,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void Start()
     {
-        buildButton.onClick.AddListener(() => OnBuildArrowTowerButtonClicked());
+        buildArrowTowerButton.onClick.AddListener(() => OnBuildArrowTowerButtonClicked());
+        buildGatlingTowerButton.onClick.AddListener(() => OnBuildGatlingTowerButtonClicked());
         sellButton.onClick.AddListener(() => OnSellCurrentTowerButtonClicked());
     }
 
@@ -30,7 +35,20 @@ public class NewBehaviourScript : MonoBehaviour
         else
         {
             Debug.Log("Arrow Tower is BUILT!");
-            currentTower = Instantiate(towerPrefab, interactiveGrid.position, Quaternion.identity);
+            currentTower = Instantiate(arrowTowerPrefab, interactiveGrid.position, Quaternion.identity);
+        }
+    }
+
+    private void OnBuildGatlingTowerButtonClicked()
+    {
+        if (currentTower != null)
+        {
+            Debug.LogWarning("This grid is OCCUPIED!");
+        }
+        else
+        {
+            Debug.Log("Gatling Tower is BUILT!");
+            currentTower = Instantiate(gatlingTowerPrefab, interactiveGrid.position, Quaternion.identity);
         }
     }
 
