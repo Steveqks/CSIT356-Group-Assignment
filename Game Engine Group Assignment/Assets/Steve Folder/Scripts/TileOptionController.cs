@@ -14,6 +14,15 @@ public class TileInfoOptionController : MonoBehaviour
     public GameObject tower2;
     public GameObject tower3;
 
+    const int tower1BuyCost = 10;
+    const int tower2BuyCost = 14;
+    const int tower3BuyCost = 20;
+
+
+    const int tower1SellCost = 5;
+    const int tower2SellCost = 7;
+    const int tower3SellCost = 10;
+
     public GameObject instantiatedTower;
 
     // Start is called before the first frame update
@@ -40,21 +49,21 @@ public class TileInfoOptionController : MonoBehaviour
         {
             GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
             PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
-            ps.itemSold(5);
+            ps.towerSold(tower1SellCost);
         }
 
         else if (to.getTileTowerType() == "Cannons")
         {
             GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
             PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
-            ps.itemSold(7);
+            ps.towerSold(tower2SellCost);
         }
 
         else if (to.getTileTowerType() == "Sniper")
         {
             GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
             PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
-            ps.itemSold(10);
+            ps.towerSold(tower3SellCost);
         }
         
         Debug.Log("123tower type is: " + to.getTileTowerType());
@@ -73,14 +82,24 @@ public class TileInfoOptionController : MonoBehaviour
 
         TileOption ti = tileInfo.GetComponent<TileOption>();
 
+
+
         if (!ti.isTowerInstantiate())
         {
-            ti.setTileinfo("Arrows");
+            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
+            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
 
-            Debug.Log("on build1");
+            if (ps.getPlayerMoney() >= tower1BuyCost) {
 
-            instantiatedTower = Instantiate(tower1, ti.GetTransform(), Quaternion.identity);
-            ti.instantiateTowerModel(instantiatedTower);
+                ps.towerBought(tower1BuyCost);
+                ti.setTileinfo("Arrows");
+
+                Debug.Log("on build1");
+
+
+                instantiatedTower = Instantiate(tower1, ti.GetTransform(), Quaternion.identity);
+                ti.instantiateTowerModel(instantiatedTower);
+            }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
 
@@ -92,16 +111,22 @@ public class TileInfoOptionController : MonoBehaviour
 
         TileOption ti = tileInfo.GetComponent<TileOption>();
 
-
-
         if (!ti.isTowerInstantiate())
         {
-            ti.setTileinfo("Cannons");
+            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
+            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
 
-            Debug.Log("on build2");
+            if (ps.getPlayerMoney() >= tower2BuyCost)
+            {
 
-            instantiatedTower = Instantiate(tower2, ti.GetTransform(), Quaternion.identity);
-            ti.instantiateTowerModel(instantiatedTower);
+                ps.towerBought(tower2BuyCost);
+                ti.setTileinfo("Cannons");
+
+                Debug.Log("on build2");
+
+                instantiatedTower = Instantiate(tower2, ti.GetTransform(), Quaternion.identity);
+                ti.instantiateTowerModel(instantiatedTower);
+            }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
     }
@@ -113,15 +138,22 @@ public class TileInfoOptionController : MonoBehaviour
         TileOption ti = tileInfo.GetComponent<TileOption>();
 
 
-
         if (!ti.isTowerInstantiate())
         {
-            ti.setTileinfo("Sniper");
+            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
+            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
 
-            Debug.Log("on build3");
+            if (ps.getPlayerMoney() >= tower3BuyCost)
+            {
 
-            instantiatedTower = Instantiate(tower3, ti.GetTransform(), Quaternion.identity);
-            ti.instantiateTowerModel(instantiatedTower);
+                ps.towerBought(tower3BuyCost);
+                ti.setTileinfo("Sniper");
+
+                Debug.Log("on build3");
+
+                instantiatedTower = Instantiate(tower3, ti.GetTransform(), Quaternion.identity);
+                ti.instantiateTowerModel(instantiatedTower);
+            }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
     }
