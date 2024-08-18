@@ -35,15 +35,15 @@ public class EnemyMovement : MonoBehaviour
     public void SetWaypoints(Transform[] newWaypoints)
     {
         agent = GetComponent<NavMeshAgent>();
-        Debug.Log("SetWaypoints");
-        Debug.Log("number of waypoints = " + waypoints.Length);
+        //Debug.Log("number of waypoints = " + waypoints.Length);
+
         // set the waypints 
         waypoints = newWaypoints;
-        Debug.Log("number of waypoints (after set) = " + waypoints.Length);
+        //Debug.Log("number of waypoints (after set) = " + waypoints.Length);
 
         if (currentWaypoint != waypoints.Length)
         {
-            Debug.Log("current waypoints = " + currentWaypoint);
+            //Debug.Log("current waypoints = " + currentWaypoint);
             agent.SetDestination(waypoints[currentWaypoint].position);
 
             if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < minDistance)
@@ -52,7 +52,6 @@ public class EnemyMovement : MonoBehaviour
                 currentWaypoint++;
 
                 Vector3 steeringForce = Seek();
-
                 Vector3 acceleration = steeringForce / mass;
 
                 currentVelocity += acceleration * Time.deltaTime;
