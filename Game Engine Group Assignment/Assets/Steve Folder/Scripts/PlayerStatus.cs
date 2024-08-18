@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    public int playerLives = 10;
+    public int playerLives = 0;
     public int playerMoney = 0;
 
     // Variable to track the value that will increment every second
@@ -69,9 +69,17 @@ public class PlayerStatus : MonoBehaviour
   
     }
 
-    public void itemSold(int value)
+    public void towerSold(int value)
     {
         playerMoney += value;
+
+        // set new PlayerMoney value
+        textMoney.SetText(playerMoney.ToString());
+    }
+
+    public void towerBought(int value)
+    {
+        playerMoney -= value;
 
         // set new PlayerMoney value
         textMoney.SetText(playerMoney.ToString());
@@ -80,5 +88,15 @@ public class PlayerStatus : MonoBehaviour
     public void takeDamage(int value)
     {
         playerLives -= value;
+    }
+
+    public int getPlayerLives()
+    {
+        return playerLives;
+    }
+
+    public int getPlayerMoney()
+    {
+        return playerMoney;
     }
 }
