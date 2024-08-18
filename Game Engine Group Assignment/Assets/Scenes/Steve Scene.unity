@@ -651,6 +651,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1996231707877608576, guid: f448e450c79e3c340851b0db3d1feabe,
+        type: 3}
+      propertyPath: playerLives
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996231707877608576, guid: f448e450c79e3c340851b0db3d1feabe,
+        type: 3}
+      propertyPath: playerMoney
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185968376219738803, guid: f448e450c79e3c340851b0db3d1feabe,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575832552338064390, guid: f448e450c79e3c340851b0db3d1feabe,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5766225515728075728, guid: f448e450c79e3c340851b0db3d1feabe,
         type: 3}
       propertyPath: m_Name
