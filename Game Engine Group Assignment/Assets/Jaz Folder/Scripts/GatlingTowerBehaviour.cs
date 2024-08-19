@@ -9,6 +9,8 @@ public class GatlingTowerBehaviour : MonoBehaviour
     public Transform arrowStart;
     public float fireRate = 1.0f;
     public float range = 10.0f;
+    public float lifetime = 3.0f;
+
     private float fireTimer;
 
     // Start is called before the first frame update
@@ -27,8 +29,10 @@ public class GatlingTowerBehaviour : MonoBehaviour
         if (arrowPrefab != null && arrowStart != null)
         {
             GameObject arrow = Instantiate(arrowPrefab, arrowStart.position, Quaternion.identity);
+            arrow.transform.LookAt(enemy.position);
             Vector3 direction = (enemy.position - arrowStart.position).normalized;
             arrow.GetComponent<Rigidbody>().velocity = direction * range;
+            Destroy(arrow, lifetime);
         }
     }
     private void OnTriggerStay(Collider other)
@@ -38,6 +42,13 @@ public class GatlingTowerBehaviour : MonoBehaviour
             Debug.Log("Enemy IN range!");
             shootProjectile(other.transform);
             fireTimer = 0.0f;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Projectile"))
+        {
+            Debug.Log("test test test");
         }
     }
 }

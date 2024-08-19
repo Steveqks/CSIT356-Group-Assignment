@@ -6,17 +6,25 @@ public class ArrowTowerBehaviour : MonoBehaviour
 {
     public GameObject arrowPrefab;
     public Transform arrowStart;
+    private GameObject testObj;
+
     public float fireRate = 1.0f;
     public float range = 10.0f;
+    public float lifetime = 3.0f;
+
+
     private float fireTimer;
+    private Rigidbody rb;
 
     bool canShoot = true;
 
-/*    private void Start()
+    /*    private void Start()
+        {
+            fireTimer = fireRate;
+        }*/
+    private void Start()
     {
-        fireTimer = fireRate;
-    }*/
-
+    }
     private void Update()
     {
         //fireTimer += Time.deltaTime;
@@ -40,8 +48,10 @@ public class ArrowTowerBehaviour : MonoBehaviour
         if (arrowPrefab != null && arrowStart != null)
         {
             GameObject arrow = Instantiate(arrowPrefab, arrowStart.position, Quaternion.identity);
+            arrow.transform.LookAt(enemy.position);
             Vector3 direction = (enemy.position - arrowStart.position).normalized;
             arrow.GetComponent<Rigidbody>().velocity = direction * range;
+            Destroy(arrow, lifetime);
         }
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
