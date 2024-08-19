@@ -13,7 +13,7 @@ public class EnemySpawner1 : MonoBehaviour
     public Transform[] airWaypoints; // Array to hold waypoint transforms
     GameObject enemy;
 
-    public int numEnemy = 10;
+    public int numEnemy = 25;
 
     private Vector3 groundPos;
     private Vector3 airPos;
@@ -77,7 +77,7 @@ public class EnemySpawner1 : MonoBehaviour
             }
 
             // spawn next enemy after 1sec
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
             
         }
     }

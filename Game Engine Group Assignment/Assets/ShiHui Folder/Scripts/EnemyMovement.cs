@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     public Transform[] waypoints;
-    [SerializeField] private float minDistance = 0.5f;
+    [SerializeField] private float minDistance = 1.0f;
     private int currentWaypoint = 0;
     private NavMeshAgent agent;
 
@@ -50,7 +50,7 @@ public class EnemyMovement : MonoBehaviour
             {
 
                 currentWaypoint++;
-
+                /**/
                 Vector3 steeringForce = Seek();
                 Vector3 acceleration = steeringForce / mass;
 
@@ -73,6 +73,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    /**/
     Vector3 Seek()
     {
         if (currentWaypoint != waypoints.Length)
@@ -88,5 +89,6 @@ public class EnemyMovement : MonoBehaviour
             return Vector3.zero;
         }
     }
+    
 
 }
