@@ -6,16 +6,16 @@ using UnityEngine;
 public class TileOption : MonoBehaviour
 {
     // used to store tower type
-    public string towertype;
+    [SerializeField] private string towertype;
 
     // TMP_Text for displaying title
-    public TMP_Text tiletitle;
+    [SerializeField] private TMP_Text tiletitle;
 
     // TileInfo obj...
-    public TileInfo tileInfo;
+    [SerializeField] private TileInfo tileInfo;
 
     // store current position of selected tower
-    Transform tilePosition;
+    private Transform tilePosition;
    
     // Start is called before the first frame update
     void Start()
