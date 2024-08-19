@@ -5,22 +5,22 @@ using UnityEngine;
 public class TileClickHandler : MonoBehaviour
 {
     // for opening layer1 layer2 options
-    public TileSelectorController selector;
+    [SerializeField] private TileSelectorController selector;
 
     // options background
-    public GameObject options;
+    [SerializeField] private GameObject options;
 
     // selecting layer 1 options
-    public GameObject optionL1;
+    [SerializeField] private GameObject optionL1;
 
     // selecting layer 2 options
-    public GameObject optionL2;
+    [SerializeField] private GameObject optionL2;
 
     // used to store which tile selected for reference
-    private TileInfo tileInfo;
+    [SerializeField] private TileInfo tileInfo;
 
     // for Tile Options Menu, for storing temporary information.
-    public TileOption tileOption;
+    [SerializeField] private TileOption tileOption;
 
     // for hover effect
     private MeshRenderer meshRenderer;

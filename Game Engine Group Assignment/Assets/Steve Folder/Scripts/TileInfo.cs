@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class TileInfo : MonoBehaviour
 {
-    public string towertype;
+    [SerializeField] private string towertype;
 
     // store instance of instantiated tower
-    GameObject instantiatedTower;
+    private GameObject instantiatedTower;
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +20,23 @@ public class TileInfo : MonoBehaviour
     void Update()
     {
         
-    }  
+    }
 
+    public bool isTowerInstantiate()
+    {
+        return instantiatedTower != null;
+    }
+
+    public void instantiateTowerModel(GameObject obj)
+    {
+        instantiatedTower = obj;
+    }
+
+    public void destroyTowerModel()
+    {
+        Destroy(instantiatedTower);
+    }
+    
     public void setTileInfo(string str)
     {
         towertype = str;
@@ -35,20 +50,5 @@ public class TileInfo : MonoBehaviour
     public TileInfo getTileInfo()
     {
         return this;
-    }
-
-    public void instantiateTowerModel(GameObject obj)
-    {
-        instantiatedTower = obj;
-    }
-
-    public void destroyTowerModel()
-    {
-        Destroy(instantiatedTower);
-    }
-
-    public bool isTowerInstantiate()
-    {
-        return instantiatedTower != null;   
     }
 }
