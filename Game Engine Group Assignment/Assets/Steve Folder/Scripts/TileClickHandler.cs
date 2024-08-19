@@ -22,10 +22,13 @@ public class TileClickHandler : MonoBehaviour
     // for Tile Options Menu, for storing temporary information.
     public TileOption tileOption;
 
+    // for hover effect
+    private MeshRenderer meshRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -37,11 +40,14 @@ public class TileClickHandler : MonoBehaviour
     // This method will be called when the mouse clicks the cube
     void OnMouseDown()
     {
-        // Example action: log to the console
-        Debug.Log("plot clicked!");
+        if (selector != null)
+        {
+            selector.closeOption();
+            meshRenderer.enabled = true;
+        }
+        else meshRenderer.enabled = true;
 
-        // You can add any action you want here, e.g., changing color, starting an animation, etc.
-        // Example: Change the color of the cube
+
 
         optionL1.SetActive(true);
         optionL2.SetActive(false);
@@ -49,8 +55,8 @@ public class TileClickHandler : MonoBehaviour
         
         tileInfo = GetComponent<TileInfo>();
 
-        Debug.Log(tileInfo);   
-
         tileOption.loadStatus(tileInfo.getTileInfo());
+
+        selector.tiletoclose(tileInfo);
     }
 }
