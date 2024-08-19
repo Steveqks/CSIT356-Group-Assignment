@@ -16,10 +16,7 @@ public class TileOption : MonoBehaviour
 
     // store current position of selected tower
     Transform tilePosition;
-    
-    
-
-
+   
     // Start is called before the first frame update
     void Start()
     {
