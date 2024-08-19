@@ -5,43 +5,51 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-	private List<Transform> waypoints;
-	private int currentWP = 0;
-	[SerializeField] private float distanceToWP = 0.5f;
-	private bool WPset = false;
+	public float speed = 10.0f;
+	private Transform target;
+
+	private int wpIndex = 0;
+	[SerializeField] private float distanceToWP = 0.4f;
+	private bool wpSet = false;
+
 	NavMeshAgent agent;
 
-	// Start is called before the first frame update
 	void Start()
 	{
+		// set target as first wp
+		target = WayPoints.waypoints[0];
 		agent = GetComponent<NavMeshAgent>();
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
-		if (!WPset)
+		if (wpSet)
 		{
-			return;
-		}
-
-		if (!agent.pathPending && agent.remainingDistance <= distanceToWP)
-		{
-			if (currentWP == waypoints.Count - 1)
+			if (!agent.pathPending && agent.remainingDistance <= distanceToWP)
 			{
-				Destroy(this.gameObject);
-			}
-			else
-			{
-				currentWP++;
-				agent.SetDestination(waypoints[currentWP].position);
+				GetNextWP();
+				agent.SetDestination(target.position);
 			}
 		}
 	}
 
-	public void SetDestination(List<Transform> waypoints)
+	void GetNextWP()
 	{
-		this.waypoints = waypoints;
-		WPset = true;
+		if (wpIndex >= WayPoints.waypoints.Count - 1)
+		{
+			Destroy(gameObject);
+			return;
+		}
+		else
+		{
+			wpIndex++;
+			target = WayPoints.waypoints[wpIndex];
+		}
+	}
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2);
 	}
 }

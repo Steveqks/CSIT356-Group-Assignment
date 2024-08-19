@@ -27,7 +27,7 @@ public class SimpleSpawner : MonoBehaviour
 		{
 			GameObject enemy = Instantiate(enemy_Prefab, transform.position,
 				Quaternion.identity);
-			enemy.GetComponent<EnemyController>().SetDestination(waypoints);
+			enemy.GetComponent<SimpleEnemyController>().SetDestination(waypoints);
 			enemyOnField++;
 		}
 	}
