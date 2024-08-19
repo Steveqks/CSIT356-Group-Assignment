@@ -46,9 +46,19 @@ public class TileOption : MonoBehaviour
         tiletitle.text = str;
     }
 
-    public Vector3 GetTransform()
+    public Vector3 getTransform()
     {
         return tilePosition.position;
+    }
+
+    public string getTileTowerType()
+    {
+        return tileInfo.getTileTowerType();
+    }
+
+    public bool isTowerInstantiate()
+    {
+        return tileInfo.isTowerInstantiate();
     }
 
     public void instantiateTowerModel(GameObject obj)
@@ -61,13 +71,5 @@ public class TileOption : MonoBehaviour
         tileInfo.destroyTowerModel();
     }
 
-    public bool isTowerInstantiate()
-    {
-        return tileInfo.isTowerInstantiate();
-    }
 
-    public string getTileTowerType()
-    {
-        return tileInfo.getTileTowerType();
-    }
 }
