@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // spawner for multiple enemies
-public class Spawner : MonoBehaviour
+public class Spawne_Advance : MonoBehaviour
 {
 	[System.Serializable]
 	public class Wave
 	{
 		public string name;
-		public Transform enemy;
+		public List<Transform> enemies;
+		public List<int> noOfEnemy;
 		public int count;
 		public float spawnRate;
 		public int spawn_Point;
@@ -108,7 +109,7 @@ public class Spawner : MonoBehaviour
 		}
 	}
 
-	void SpawnEnemy(Transform enemy, Transform sp)
+	void SpawnEnemy(List<Transform> enemies, Transform sp)
 	{
 		Quaternion rotation = Quaternion.Euler(0, angle, 0);
 		Instantiate(enemy, sp.position, rotation);
@@ -134,7 +135,7 @@ public class Spawner : MonoBehaviour
 		for (int i = 0; i < wave.count; i++)
 		{
 			Transform sp = GetSpawnPoint(wave);
-			SpawnEnemy(wave.enemy, sp);
+			SpawnEnemy(wave.enemies, sp);
 			yield return new WaitForSeconds(wave.spawnRate);
 		}
 
