@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
 	private Transform target;
 	private int wpCount = 0;
 	private int wpIndex = 0;
-	[SerializeField] private float distanceToWP = 0.5f;
+	[SerializeField] private float distanceToWP = 1.0f;
 
 	NavMeshAgent agent;
 
