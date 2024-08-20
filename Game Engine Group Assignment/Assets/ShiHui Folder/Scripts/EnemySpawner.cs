@@ -7,37 +7,78 @@ using UnityEngine.UIElements;
 
 public class EnemySpawner : MonoBehaviour
 {
-    //public GameObject enemyPrefab;
-    public GameObject[] enemyPrefabs;
-    public Transform[] waypoints; // Array to hold waypoint transforms
+    public GameObject[] groundEnemyPrefabs;
+    public GameObject[] airEnemyPrefabs;
+    public Transform[] groundWaypoints; // Array to hold waypoint transforms
+    public Transform[] airWaypoints; // Array to hold waypoint transforms
     GameObject enemy;
 
-    public int numEnemy = 2;
+    public int numEnemy = 25;
+
+    private Vector3 groundPos;
+    private Vector3 airPos;
 
     void Start()
     {
+        groundPos = transform.position;
+        airPos = transform.position + new Vector3(0f, 3.5f, 0f);
         StartCoroutine(spawnEnemy());
     }
 
     IEnumerator spawnEnemy()
     {
+        int ranNum;
+
         for (int i = 0; i < numEnemy; i++)
         {
-            int ranNum = Random.Range(0, 2); // 0 is fast, 1 is slow
-            Debug.Log("randome number = " + ranNum);
-            enemy = Instantiate(enemyPrefabs[ranNum], transform.position, Quaternion.identity);
+            int ranPos = Random.Range(0, 2); // 0 is ground, 1 is air 
+            if (ranPos == 0)
+            {
+                ranNum = Random.Range(0, 2); // 0 is fast, 1 is slow
+                if (ranNum == 0)
+                {
+                    enemy = Instantiate(groundEnemyPrefabs[ranNum], groundPos, Quaternion.identity);
+                }
+                else
+                {
+                    enemy = Instantiate(groundEnemyPrefabs[ranNum], groundPos, Quaternion.identity);
+                }
+            }
+            else
+            {
+                ranNum = Random.Range(0, 2); // 0 is fast, 1 is slow
+                if (ranNum == 0)
+                {
+                    enemy = Instantiate(airEnemyPrefabs[ranNum], airPos, Quaternion.identity);
+                }
+                else
+                {
+                    enemy = Instantiate(airEnemyPrefabs[ranNum], airPos, Quaternion.identity);
+                }
+            }
 
             if (enemy != null)
             {
                 EnemyMovement enemyMovement = enemy.GetComponent<EnemyMovement>();
                 if (enemyMovement != null)
                 {
-                    Debug.Log("Call SetWaypoints");
-                    enemyMovement.SetWaypoints(waypoints);
+                    if (ranPos == 0)
+                    {
+                        Debug.Log("Call SetWaypoints - " + enemy.gameObject.name);
+                        enemyMovement.SetWaypoints(groundWaypoints);
+                    }
+                    else
+                    {
+                        Debug.Log("Call SetWaypoints - " + enemy.gameObject.name);
+                        enemyMovement.SetWaypoints(airWaypoints);
+                    }
+                    
                 }
             }
+
             // spawn next enemy after 1sec
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
+            
         }
     }
 }

@@ -16,17 +16,14 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        // need check 
         if (health <= 0)
         {
-            Debug.Log("health = " + health);
             Die();
         }
         else if (health <= 20)
         {
-            Debug.Log("speed = " + agent.speed);
-            Debug.Log("health = " + health);
             agent.speed = 8;
-            Debug.Log("speed = " + agent.speed);
         }
     }
     public void Damage(int damage)
