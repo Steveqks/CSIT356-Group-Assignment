@@ -6,20 +6,17 @@ using UnityEngine;
 public class TileOption : MonoBehaviour
 {
     // used to store tower type
-    public string towertype;
+    [SerializeField] private string towertype;
 
     // TMP_Text for displaying title
-    public TMP_Text tiletitle;
+    [SerializeField] private TMP_Text tiletitle;
 
     // TileInfo obj...
-    public TileInfo tileInfo;
+    [SerializeField] private TileInfo tileInfo;
 
     // store current position of selected tower
-    Transform tilePosition;
-    
-    
-
-
+    private Transform tilePosition;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -49,9 +46,19 @@ public class TileOption : MonoBehaviour
         tiletitle.text = str;
     }
 
-    public Vector3 GetTransform()
+    public Vector3 getTransform()
     {
         return tilePosition.position;
+    }
+
+    public string getTileTowerType()
+    {
+        return tileInfo.getTileTowerType();
+    }
+
+    public bool isTowerInstantiate()
+    {
+        return tileInfo.isTowerInstantiate();
     }
 
     public void instantiateTowerModel(GameObject obj)
@@ -64,13 +71,5 @@ public class TileOption : MonoBehaviour
         tileInfo.destroyTowerModel();
     }
 
-    public bool isTowerInstantiate()
-    {
-        return tileInfo.isTowerInstantiate();
-    }
 
-    public string getTileTowerType()
-    {
-        return tileInfo.getTileTowerType();
-    }
 }

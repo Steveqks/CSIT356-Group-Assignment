@@ -8,22 +8,23 @@ using UnityEngine;
 
 public class TileInfoOptionController : MonoBehaviour
 {
-    public TileSelectorController selector;
 
-    public GameObject tower1;
-    public GameObject tower2;
-    public GameObject tower3;
+    // insert tower prefab here
+    [SerializeField] private GameObject tower1;
+    [SerializeField] private GameObject tower2;
+    [SerializeField] private GameObject tower3;
 
-    const int tower1BuyCost = 10;
-    const int tower2BuyCost = 14;
-    const int tower3BuyCost = 20;
+    // set tower buy price here // inspector view have higher control
+    [SerializeField] private int tower1BuyCost = 10;
+    [SerializeField] private int tower2BuyCost = 14;
+    [SerializeField] private int tower3BuyCost = 20;
 
+    // set tower sell price here // inspector view have higher control
+    [SerializeField] private int tower1SellCost = 5;
+    [SerializeField] private int tower2SellCost = 7;
+    [SerializeField] private int tower3SellCost = 10;
 
-    const int tower1SellCost = 5;
-    const int tower2SellCost = 7;
-    const int tower3SellCost = 10;
-
-    public GameObject instantiatedTower;
+    private GameObject instantiatedTower;
 
     // Start is called before the first frame update
     void Start()
@@ -36,45 +37,6 @@ public class TileInfoOptionController : MonoBehaviour
     {
         
     }   
-
-    public void onSell()
-    {
-        Transform tileInfo = transform.parent.parent;
-
-        TileOption to = tileInfo.GetComponent<TileOption>();
-
-
-        // retreive tile tower info
-        if(to.getTileTowerType() == "Arrows")
-        {
-            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
-            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
-            ps.towerSold(tower1SellCost);
-        }
-
-        else if (to.getTileTowerType() == "Cannons")
-        {
-            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
-            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
-            ps.towerSold(tower2SellCost);
-        }
-
-        else if (to.getTileTowerType() == "Sniper")
-        {
-            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
-            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
-            ps.towerSold(tower3SellCost);
-        }
-        
-        Debug.Log("123tower type is: " + to.getTileTowerType());
-        Debug.Log("on sell");
-
-        to.setTileinfo("empty");
-
-        to.destroyTowerModel();
-
-        
-    }
 
     public void onBuild1()
     {
@@ -97,14 +59,13 @@ public class TileInfoOptionController : MonoBehaviour
                 Debug.Log("on build1");
 
 
-                instantiatedTower = Instantiate(tower1, ti.GetTransform(), Quaternion.identity);
+                instantiatedTower = Instantiate(tower1, ti.getTransform(), Quaternion.identity);
                 ti.instantiateTowerModel(instantiatedTower);
             }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
 
     }
-
     public void onBuild2()
     {
         Transform tileInfo = transform.parent.parent;
@@ -124,7 +85,7 @@ public class TileInfoOptionController : MonoBehaviour
 
                 Debug.Log("on build2");
 
-                instantiatedTower = Instantiate(tower2, ti.GetTransform(), Quaternion.identity);
+                instantiatedTower = Instantiate(tower2, ti.getTransform(), Quaternion.identity);
                 ti.instantiateTowerModel(instantiatedTower);
             }
         }
@@ -151,11 +112,45 @@ public class TileInfoOptionController : MonoBehaviour
 
                 Debug.Log("on build3");
 
-                instantiatedTower = Instantiate(tower3, ti.GetTransform(), Quaternion.identity);
+                instantiatedTower = Instantiate(tower3, ti.getTransform(), Quaternion.identity);
                 ti.instantiateTowerModel(instantiatedTower);
             }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
     }
 
+    public void onSell()
+    {
+        Transform tileInfo = transform.parent.parent;
+
+        TileOption to = tileInfo.GetComponent<TileOption>();
+
+        // retreive tile tower info
+        if (to.getTileTowerType() == "Arrows")
+        {
+            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
+            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
+            ps.towerSold(tower1SellCost);
+        }
+
+        else if (to.getTileTowerType() == "Cannons")
+        {
+            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
+            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
+            ps.towerSold(tower2SellCost);
+        }
+
+        else if (to.getTileTowerType() == "Sniper")
+        {
+            GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
+            PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
+            ps.towerSold(tower3SellCost);
+        }
+
+        Debug.Log("on sell");
+
+        to.setTileinfo("empty");
+
+        to.destroyTowerModel();
+    }
 }

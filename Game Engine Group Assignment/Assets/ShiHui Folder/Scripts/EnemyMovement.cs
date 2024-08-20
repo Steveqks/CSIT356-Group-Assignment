@@ -7,43 +7,39 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     public Transform[] waypoints;
-    [SerializeField] private float minDistance = 0.5f;
+    [SerializeField] private float minDistance = 1.0f;
     private int currentWaypoint = 0;
     private NavMeshAgent agent;
+    private GameObject obj;
+    private PlayerStatus ps;
+
 
     public float maxSpeed = 10.0f;
 
-    float mass = 1.0f;
-    Vector3 currentVelocity = Vector3.zero;
+    public float mass = 1.0f;
+    private Vector3 currentVelocity = Vector3.zero;
     
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2);
-    }
-
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        obj = GameObject.FindGameObjectWithTag("PlayerStatus");
+        ps = obj.GetComponent<PlayerStatus>();
     }
 
     private void Update()
     {
         SetWaypoints(waypoints);
     }
+
     public void SetWaypoints(Transform[] newWaypoints)
     {
         agent = GetComponent<NavMeshAgent>();
-        Debug.Log("SetWaypoints");
-        Debug.Log("number of waypoints = " + waypoints.Length);
+
         // set the waypints 
         waypoints = newWaypoints;
-        Debug.Log("number of waypoints (after set) = " + waypoints.Length);
 
         if (currentWaypoint != waypoints.Length)
         {
-            Debug.Log("current waypoints = " + currentWaypoint);
             agent.SetDestination(waypoints[currentWaypoint].position);
 
             if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < minDistance)
@@ -52,7 +48,6 @@ public class EnemyMovement : MonoBehaviour
                 currentWaypoint++;
 
                 Vector3 steeringForce = Seek();
-
                 Vector3 acceleration = steeringForce / mass;
 
                 currentVelocity += acceleration * Time.deltaTime;
@@ -70,15 +65,15 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             Debug.Log(this.gameObject.name + " - reach the last waypoint");
+            ps.takeDamage(1);
             Destroy(this.gameObject);
         }
     }
-
+    
     Vector3 Seek()
     {
         if (currentWaypoint != waypoints.Length)
         {
-            //Vector3 toTarget = target.position - transform.position;
             Vector3 toTarget = waypoints[currentWaypoint].position - transform.position;
             toTarget.y = 0;
             Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
@@ -89,5 +84,6 @@ public class EnemyMovement : MonoBehaviour
             return Vector3.zero;
         }
     }
+    
 
 }

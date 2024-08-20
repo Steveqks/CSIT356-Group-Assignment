@@ -5,27 +5,30 @@ using UnityEngine;
 public class TileClickHandler : MonoBehaviour
 {
     // for opening layer1 layer2 options
-    public TileSelectorController selector;
+    [SerializeField] private TileSelectorController selector;
 
     // options background
-    public GameObject options;
+    [SerializeField] private GameObject options;
 
     // selecting layer 1 options
-    public GameObject optionL1;
+    [SerializeField] private GameObject optionL1;
 
     // selecting layer 2 options
-    public GameObject optionL2;
+    [SerializeField] private GameObject optionL2;
 
     // used to store which tile selected for reference
-    private TileInfo tileInfo;
+    [SerializeField] private TileInfo tileInfo;
 
     // for Tile Options Menu, for storing temporary information.
-    public TileOption tileOption;
+    [SerializeField] private TileOption tileOption;
+
+    // for hover effect
+    private MeshRenderer meshRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        meshRenderer = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -37,11 +40,14 @@ public class TileClickHandler : MonoBehaviour
     // This method will be called when the mouse clicks the cube
     void OnMouseDown()
     {
-        // Example action: log to the console
-        Debug.Log("plot clicked!");
+        if (selector != null)
+        {
+            selector.closeOption();
+            meshRenderer.enabled = true;
+        }
+        else meshRenderer.enabled = true;
 
-        // You can add any action you want here, e.g., changing color, starting an animation, etc.
-        // Example: Change the color of the cube
+
 
         optionL1.SetActive(true);
         optionL2.SetActive(false);
@@ -49,8 +55,8 @@ public class TileClickHandler : MonoBehaviour
         
         tileInfo = GetComponent<TileInfo>();
 
-        Debug.Log(tileInfo);   
-
         tileOption.loadStatus(tileInfo.getTileInfo());
+
+        selector.tiletoclose(tileInfo);
     }
 }

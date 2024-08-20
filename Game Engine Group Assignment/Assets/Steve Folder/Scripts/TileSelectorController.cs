@@ -14,10 +14,13 @@ public class TileSelectorController : MonoBehaviour
     // options layer 2
     [SerializeField] GameObject OptionL2;
 
+    // for managing selected tile (highlighting tile effects)
+    private TileInfo tileOBGtoclose;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -25,7 +28,6 @@ public class TileSelectorController : MonoBehaviour
     {
         
     }
-
 
     public void setLayer1()
     {
@@ -43,11 +45,22 @@ public class TileSelectorController : MonoBehaviour
         OptionL2.SetActive(false);
         OptionL1.SetActive(true);
     }
-
     public void closeOption()
     {
+        if (tileOBGtoclose != null)
+        {
+            tileOBGtoclose.GetComponent<MeshRenderer>().enabled = false;
+        }
+
         OptionL2.SetActive(false);
         OptionL1.SetActive(true);
         Options.SetActive(false);
     }
+
+    public void tiletoclose(TileInfo obj)
+    {
+        tileOBGtoclose = obj;
+    }
+
+    
 }

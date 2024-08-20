@@ -9,7 +9,8 @@
 **/[Bb]uilds/
 **/[Ll]ogs/
 **/[Uu]ser[Ss]ettings/
-/Game Engine Group Assignment/UserSettings/
+**/UserSettings/
+/Game Engine Group Assignment/UserSettings
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data

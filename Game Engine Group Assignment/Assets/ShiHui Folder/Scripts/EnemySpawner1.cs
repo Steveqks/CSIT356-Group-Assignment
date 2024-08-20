@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner1 : MonoBehaviour
 {
     public GameObject[] groundEnemyPrefabs;
     public GameObject[] airEnemyPrefabs;
