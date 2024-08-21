@@ -6,43 +6,44 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform[] waypoints;
-    [SerializeField] private float minDistance = 1.0f;
+    private Transform target;
     private int currentWaypoint = 0;
+    private int totalWaypoint = 0;
+
+    [SerializeField] private float minDistance = 1.0f;
+    
     private NavMeshAgent agent;
+    /*
     private GameObject obj;
     private PlayerStatus ps;
-
+    */
 
     public float maxSpeed = 10.0f;
 
     public float mass = 1.0f;
     private Vector3 currentVelocity = Vector3.zero;
+
     
     private void Start()
     {
+
         agent = GetComponent<NavMeshAgent>();
+        target = WayPoints.waypoints[currentWaypoint];
+        totalWaypoint = WayPoints.waypoints.Count;
+        /*
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
+        */
     }
 
     private void Update()
     {
-        SetWaypoints(waypoints);
-    }
-
-    public void SetWaypoints(Transform[] newWaypoints)
-    {
-        agent = GetComponent<NavMeshAgent>();
-
-        // set the waypints 
-        waypoints = newWaypoints;
-
-        if (currentWaypoint != waypoints.Length)
+        //SetWaypoints(waypoints);
+        if (currentWaypoint != totalWaypoint)
         {
-            agent.SetDestination(waypoints[currentWaypoint].position);
+            agent.SetDestination(target.position);
 
-            if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) < minDistance)
+            if (Vector3.Distance(transform.position, target.position) < minDistance)
             {
 
                 currentWaypoint++;
@@ -65,16 +66,16 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             Debug.Log(this.gameObject.name + " - reach the last waypoint");
-            ps.takeDamage(1);
+            /*ps.takeDamage(1);*/
             Destroy(this.gameObject);
         }
     }
-    
+
     Vector3 Seek()
     {
-        if (currentWaypoint != waypoints.Length)
+        if (currentWaypoint != totalWaypoint)
         {
-            Vector3 toTarget = waypoints[currentWaypoint].position - transform.position;
+            Vector3 toTarget = target.position - transform.position;
             toTarget.y = 0;
             Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
             return (desiredVelocity - currentVelocity);

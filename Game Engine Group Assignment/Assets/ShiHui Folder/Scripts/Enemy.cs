@@ -8,10 +8,26 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] public int health = 100;
     private NavMeshAgent agent;
+    /*
+    private GameObject obj;
+    private PlayerStatus ps;
+    */
+
+    public enum EnemyType
+    {
+        GROUND,
+        AIR
+    } 
+
+    public EnemyType enemyType = EnemyType.GROUND;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        /*
+        obj = GameObject.FindGameObjectWithTag("PlayerStatus");
+        ps = obj.GetComponent<PlayerStatus>();
+        */
     }
 
     private void Update()
@@ -33,6 +49,8 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        // add money 
+        /*ps.takeDamage(1);*/
         Destroy(gameObject);
     }
 
