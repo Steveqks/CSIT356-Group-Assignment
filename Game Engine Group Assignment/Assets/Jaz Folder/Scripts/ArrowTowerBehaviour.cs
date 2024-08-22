@@ -18,12 +18,45 @@ public class ArrowTowerBehaviour : MonoBehaviour
 
     bool canShoot = true;
 
+    private MeshRenderer showRangeMeshRenderer;
+
     /*    private void Start()
         {
             fireTimer = fireRate;
         }*/
     private void Start()
     {
+        Transform meshRendTransform = transform.Find("showRange");
+
+        if (meshRendTransform != null )
+        {
+            showRangeMeshRenderer = meshRendTransform.GetComponent<MeshRenderer>();
+
+            if (showRangeMeshRenderer != null)
+            {
+                showRangeMeshRenderer.enabled = false;
+            }
+        }
+        else
+        {
+            Debug.LogError("showRange is not Found");
+        }
+    }
+
+    private void ToggleShowRange(bool show)
+    {
+        if (showRangeMeshRenderer != null)
+        {
+            showRangeMeshRenderer.enabled = show;
+        }
+    }
+    private void OnMouseEnter()
+    {
+        ToggleShowRange(true);
+    }
+    private void OnMouseExit()
+    {
+        ToggleShowRange(false);
     }
     private void Update()
     {

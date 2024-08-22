@@ -13,10 +13,43 @@ public class GatlingTowerBehaviour : MonoBehaviour
 
     private float fireTimer;
 
+    private MeshRenderer showRangeMeshRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
         fireTimer = fireRate;
+
+        Transform meshRendTransform = transform.Find("showRange");
+
+        if (meshRendTransform != null)
+        {
+            showRangeMeshRenderer = meshRendTransform.GetComponent<MeshRenderer>();
+
+            if (showRangeMeshRenderer != null)
+            {
+                showRangeMeshRenderer.enabled = false;
+            }
+        }
+        else
+        {
+            Debug.LogError("showRange is not Found");
+        }
+    }
+    private void ToggleShowRange(bool show)
+    {
+        if (showRangeMeshRenderer != null)
+        {
+            showRangeMeshRenderer.enabled = show;
+        }
+    }
+    private void OnMouseEnter()
+    {
+        ToggleShowRange(true);
+    }
+    private void OnMouseExit()
+    {
+        ToggleShowRange(false);
     }
 
     // Update is called once per frame
