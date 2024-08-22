@@ -9,12 +9,6 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private int playerLives = 0;
     [SerializeField] private int playerMoney = 0;
 
-    // Variable to track the value that will increment every second
-    // private int incrementValue = 0;
-
-    // Variable to keep track of time
-    private float timeElapsed = 0f;
-
     // used for updating lives being displayed on player UI
     private GameObject playerLivesTMP;
     private TMP_Text textLives;
@@ -59,32 +53,6 @@ public class PlayerStatus : MonoBehaviour
     void Update()
     {
 
-        //GameObject obj = GameObject.FindGameObjectWithTag("PlayerLives");
-        //TMP_Text text = obj.GetComponent<TMP_Text>();
-
-        // Add the time since the last frame to timeElapsed
-        timeElapsed += Time.deltaTime;
-
-        // Check if one second has passed
-        if (timeElapsed >= 1f)
-        {
-            // for testing player live
-            //takeDamage(-1);
-
-
-            // Increment the value
-            //incrementValue += 1;
-
-            // Output the value to the console (optional)
-            //Debug.Log("Incremented Value: " + incrementValue);
-
-            //playerMoney = incrementValue;
-            //playerLives = incrementValue;   
-
-            // Reset the timeElapsed, subtracting 1 to handle slight inaccuracies
-            timeElapsed -= 1f;
-        }
-
         foreach (KeyCode key in targetSequence)
         {
             if (Input.GetKeyDown(key))
@@ -100,9 +68,8 @@ public class PlayerStatus : MonoBehaviour
         {
             CheatsResetSequence();
         }
-
-
     }
+
     public int getPlayerLives()
     {
         return playerLives;
@@ -112,11 +79,13 @@ public class PlayerStatus : MonoBehaviour
     {
         return playerMoney;
     }
+
     public void takeDamage(int value)
     {
         playerLives -= value;
         textLives.text = playerLives.ToString();
     }
+
     public void enemyReward(int value)
     {
         playerMoney += value;
