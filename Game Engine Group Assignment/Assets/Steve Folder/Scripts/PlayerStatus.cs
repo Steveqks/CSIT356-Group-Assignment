@@ -14,7 +14,7 @@ public class PlayerStatus : MonoBehaviour
 
     // Variable to keep track of time
     private float timeElapsed = 0f;
-    
+
     // used for updating lives being displayed on player UI
     private GameObject playerLivesTMP;
     private TMP_Text textLives;
@@ -120,6 +120,13 @@ public class PlayerStatus : MonoBehaviour
     public void enemyReward(int value)
     {
         playerMoney += value;
+
+        // check if hit over max,
+        if (playerMoney > 99)
+        {
+            playerMoney = 99;
+        }
+
         textMoney.text = playerMoney.ToString();
     }
 
@@ -134,6 +141,12 @@ public class PlayerStatus : MonoBehaviour
     public void towerSold(int value)
     {
         playerMoney += value;
+
+        // check if hit over max,
+        if (playerMoney > 99)
+        {
+            playerMoney = 99;
+        }
 
         // set new PlayerMoney value
         textMoney.SetText(playerMoney.ToString());
