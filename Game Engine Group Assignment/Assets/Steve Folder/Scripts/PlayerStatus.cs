@@ -51,7 +51,7 @@ public class PlayerStatus : MonoBehaviour
         if (timeElapsed >= 1f)
         {
             // for testing player live
-            takeDamage(-1);
+            //takeDamage(-1);
 
 
             // Increment the value
@@ -81,7 +81,11 @@ public class PlayerStatus : MonoBehaviour
     {
         playerLives -= value;
         textLives.text = playerLives.ToString();
-
+    }
+    public void enemyReward(int value)
+    {
+        playerMoney += value;
+        textMoney.text = playerMoney.ToString();
     }
 
     public void towerBought(int value)
