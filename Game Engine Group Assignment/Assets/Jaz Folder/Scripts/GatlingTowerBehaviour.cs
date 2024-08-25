@@ -7,7 +7,7 @@ public class GatlingTowerBehaviour : MonoBehaviour
 
     public GameObject arrowPrefab;
     public Transform arrowStart;
-    public float fireRate = 1.0f;
+   // public float fireRate = 1.0f;
     public float range = 10.0f;
     public float lifetime = 3.0f;
 
@@ -18,7 +18,7 @@ public class GatlingTowerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fireTimer = fireRate;
+        //fireTimer = fireRate;
 
         Transform meshRendTransform = transform.Find("showRange");
 

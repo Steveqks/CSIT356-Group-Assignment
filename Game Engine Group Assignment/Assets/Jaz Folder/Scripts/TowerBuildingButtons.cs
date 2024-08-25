@@ -13,6 +13,9 @@ public class TowerBuildingButtons : MonoBehaviour
     public GameObject gatlingTowerPrefab;
     public Button buildGatlingTowerButton;
 
+    public GameObject explosiveTowerPrefab;
+    public Button buildExplosiveTowerButton;
+
     public Transform interactiveGrid;
     public Button sellButton;
 
@@ -23,6 +26,7 @@ public class TowerBuildingButtons : MonoBehaviour
     {
         buildArrowTowerButton.onClick.AddListener(() => OnBuildArrowTowerButtonClicked());
         buildGatlingTowerButton.onClick.AddListener(() => OnBuildGatlingTowerButtonClicked());
+        buildExplosiveTowerButton.onClick.AddListener(() => OnBuildExplosiveTowerButtonClicked());
         sellButton.onClick.AddListener(() => OnSellCurrentTowerButtonClicked());
     }
 
@@ -49,6 +53,18 @@ public class TowerBuildingButtons : MonoBehaviour
         {
             Debug.Log("Gatling Tower is BUILT!");
             currentTower = Instantiate(gatlingTowerPrefab, interactiveGrid.position, Quaternion.identity);
+        }
+    }
+    private void OnBuildExplosiveTowerButtonClicked()
+    {
+        if (currentTower != null)
+        {
+            Debug.LogWarning("This grid is OCCUPIED!");
+        }
+        else
+        {
+            Debug.Log("Explosive Tower is BUILT!");
+            currentTower = Instantiate(explosiveTowerPrefab, interactiveGrid.position, Quaternion.identity);
         }
     }
 
