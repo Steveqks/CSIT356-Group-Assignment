@@ -28,7 +28,7 @@ public class ArrowTowerBehaviour : MonoBehaviour
     {
         Transform meshRendTransform = transform.Find("showRange");
 
-        if (meshRendTransform != null )
+        if (meshRendTransform != null)
         {
             showRangeMeshRenderer = meshRendTransform.GetComponent<MeshRenderer>();
 
