@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     private PlayerStatus ps;
     */
 
+    public ParticleSystem blood;
+
     [SerializeField] int reward;
 
     public enum EnemyType
@@ -54,8 +56,10 @@ public class Enemy : MonoBehaviour
     }
     public void Damage(int damage)
     {
-        health -= damage;
         // particle - blood 
+        Instantiate(blood, transform.position, Quaternion.identity);
+
+        health -= damage;
     }
 
     public void Die()
