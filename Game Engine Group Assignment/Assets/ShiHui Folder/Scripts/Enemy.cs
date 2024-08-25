@@ -8,10 +8,13 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] public int health = 100;
     private NavMeshAgent agent;
+    private Renderer renderer;
     /*
     private GameObject obj;
     private PlayerStatus ps;
     */
+
+    [SerializeField] int reward;
 
     public enum EnemyType
     {
@@ -24,6 +27,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        renderer = GetComponent<Renderer>();
         /*
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
@@ -32,25 +36,32 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        // need check 
         if (health <= 0)
         {
             Die();
         }
         else if (health <= 20)
         {
+            // change color 
+            renderer.material.color = Color.red;
             agent.speed = 8;
+        }
+        else if (health <= 50)
+        {
+            // change color 
+            renderer.material.color = Color.yellow;
         }
     }
     public void Damage(int damage)
     {
         health -= damage;
+        // particle - blood 
     }
 
     public void Die()
     {
         // add money 
-        /*ps.takeDamage(1);*/
+        /*ps.enemyReward(reward);*/
         Destroy(gameObject);
     }
 
