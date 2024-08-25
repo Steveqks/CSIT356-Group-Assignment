@@ -21,38 +21,6 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
 
     /*    public float throwCooldown = 1.0f;
         private float lastThrowTime = 0f;*/
-
-    private IEnumerator CannonPS(Collision collision)
-    {
-        Vector3 hitPoint = collision.contacts[0].point;
-        Vector3 hitNormal = collision.contacts[0].normal;
-
-        GameObject ps = Instantiate(particleSysPrefab, hitPoint, Quaternion.LookRotation(hitNormal));
-        Debug.Log("Particle System Instantiated at: " + hitPoint);
-
-        var psComponent = ps.GetComponent<ParticleSystem>();
-        if (psComponent != null)
-        {
-            psComponent.Play();
-            Debug.Log("Particle System started playing.");
-        }
-        else
-        {
-            Debug.Log("Particle Sys Component not found");
-        }
-
-        if (psComponent != null)
-        {
-            float duration = psComponent.main.duration;
-            Debug.Log(duration);
-            yield return new WaitForSeconds(duration);
-        }
-        else
-        {
-            yield return new WaitForSeconds(1);
-        }
-        Destroy(ps);
-    }
     private IEnumerator shootProjectile(Transform enemy)
     {
         if (cannonPrefab != null && cannonStart != null)
