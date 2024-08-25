@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     */
 
     public ParticleSystem blood;
+    Animator animator;
+
 
     [SerializeField] int reward;
 
@@ -24,7 +26,8 @@ public class Enemy : MonoBehaviour
         AIR
     } 
 
-    public EnemyType enemyType = EnemyType.GROUND;
+    //public EnemyType enemyType = EnemyType.GROUND;
+    public EnemyType enemyType;
 
     private void Start()
     {
@@ -34,10 +37,21 @@ public class Enemy : MonoBehaviour
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
         */
+
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
+        if (enemyType == EnemyType.GROUND)
+        {
+            animator.Play("Run");
+        } 
+        else if (enemyType == EnemyType.AIR) {
+            animator.Play("Fly");
+        }
+        
+
         if (health <= 0)
         {
             Die();
@@ -56,6 +70,8 @@ public class Enemy : MonoBehaviour
     }
     public void Damage(int damage)
     {
+        animator.Play("Hit");
+
         // particle - blood 
         Instantiate(blood, transform.position, Quaternion.identity);
 
@@ -64,8 +80,11 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        animator.Play("Death");
+
         // add money 
         /*ps.enemyReward(reward);*/
+
         Destroy(gameObject);
     }
 
