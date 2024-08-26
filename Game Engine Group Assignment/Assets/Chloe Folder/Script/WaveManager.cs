@@ -32,19 +32,19 @@ public class WaveManager : MonoBehaviour
 		public float spawnRate;
 	}
 
-	public enum State
+	private enum State
 	{
 		SPAWNING,
 		WAITING,
 		TIMING
 	}
-	public State state = State.TIMING;
+	private State state = State.TIMING;
 
 	public List<Transform> spawnPoints;
 	public List<Wave> waves;
 
 	public float timeToNextWave;
-	public float countDown;
+	private float countDown;
 	private float waitTime = 1.0f;
 	private int nextWave = 0;
 	private int angle = 90;

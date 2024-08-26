@@ -777,8 +777,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 85748655}
-  - component: {fileID: 85748654}
-  - component: {fileID: 85748656}
   - component: {fileID: 85748657}
   m_Layer: 0
   m_Name: _GameMaster
@@ -787,34 +785,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &85748654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 85748653}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60685568e7c764e4d970804bc1a41770, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 2
-  spawnPoints:
-  - {fileID: 1040975097}
-  waves:
-  - name: Normal Enemies
-    enemy: {fileID: 1507421540743214022, guid: 7f8f80d8d6599b74e9c90633e8faff94, type: 3}
-    count: 5
-    spawnRate: 1
-    spawn_Point: 0
-  - name: Special Enemies
-    enemy: {fileID: 5249784638455143204, guid: dd5fe510525651a4fa932996d89cdad9, type: 3}
-    count: 3
-    spawnRate: 4
-    spawn_Point: 0
-  timeToNextWave: 5
-  countDown: 2
 --- !u!4 &85748655
 Transform:
   m_ObjectHideFlags: 0
@@ -830,30 +800,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &85748656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 85748653}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed89047cf817a1746aa606f5863a6968, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 2
-  spawnPoints: []
-  waves:
-  - name: 
-    waveContents:
-    - enemy: {fileID: 0}
-      maxCount: 0
-    - enemy: {fileID: 0}
-      maxCount: 0
-    spawnRate: 0
-  timeToNextWave: 0
-  countDown: 0
 --- !u!114 &85748657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -866,7 +812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5276366849855045bc09257cb5456f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
   spawnPoints:
   - {fileID: 1040975097}
   waves:
@@ -880,7 +825,6 @@ MonoBehaviour:
       maxCount: 10
     spawnRate: 1
   timeToNextWave: 3
-  countDown: 0
 --- !u!1001 &87360946
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,85 +6,96 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private Transform target;
-    private int currentWaypoint = 0;
-    private int totalWaypoint = 0;
+	private Transform target;
+	private int currentWaypoint = 0;
+	private int totalWaypoint = 0;
 
-    [SerializeField] private float minDistance = 1.0f;
-    
-    private NavMeshAgent agent;
-    /*
+	[SerializeField] private float minDistance = 1.0f;
+
+	private NavMeshAgent agent;
+	/*
     private GameObject obj;
     private PlayerStatus ps;
     */
 
-    public float maxSpeed = 10.0f;
+	public float maxSpeed = 10.0f;
 
-    public float mass = 1.0f;
-    private Vector3 currentVelocity = Vector3.zero;
+	public float mass = 1.0f;
+	private Vector3 currentVelocity = Vector3.zero;
 
-    
-    private void Start()
-    {
 
-        agent = GetComponent<NavMeshAgent>();
-        target = WayPoints.waypoints[currentWaypoint];
-        totalWaypoint = WayPoints.waypoints.Count;
-        /*
+	private void Start()
+	{
+
+		agent = GetComponent<NavMeshAgent>();
+		target = WayPoints.waypoints[currentWaypoint];
+		totalWaypoint = WayPoints.waypoints.Count;
+		/*
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
         */
-    }
+	}
 
-    private void Update()
-    {
-        //SetWaypoints(waypoints);
-        if (currentWaypoint != totalWaypoint)
-        {
-            agent.SetDestination(target.position);
+	private void Update()
+	{
+		Enemy enemy = agent.GetComponent<Enemy>();
 
-            if (Vector3.Distance(transform.position, target.position) < minDistance)
-            {
+		if (enemy.enemyType == Enemy.EnemyType.AIR)
+		{
+			minDistance = 15.0f;
+		}
+		else
+		{
+			minDistance = 1.0f;
+		}
 
-                currentWaypoint++;
+		if (currentWaypoint != totalWaypoint)
+		{
+			target = WayPoints.waypoints[currentWaypoint];
+			agent.SetDestination(target.position);
 
-                Vector3 steeringForce = Seek();
-                Vector3 acceleration = steeringForce / mass;
+			if (Vector3.Distance(transform.position, target.position) < minDistance)
+			{
 
-                currentVelocity += acceleration * Time.deltaTime;
-                currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed);
+				currentWaypoint++;
 
-                transform.position += currentVelocity * Time.deltaTime;
-                agent.velocity = currentVelocity;
+				Vector3 steeringForce = Seek();
+				Vector3 acceleration = steeringForce / mass;
 
-                if (currentVelocity != Vector3.zero)
-                {
-                    transform.rotation = Quaternion.LookRotation(currentVelocity);
-                }
-            }
-        }
-        else
-        {
-            Debug.Log(this.gameObject.name + " - reach the last waypoint");
-            /*ps.takeDamage(1);*/
-            Destroy(this.gameObject);
-        }
-    }
+				currentVelocity += acceleration * Time.deltaTime;
+				currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed);
 
-    Vector3 Seek()
-    {
-        if (currentWaypoint != totalWaypoint)
-        {
-            Vector3 toTarget = target.position - transform.position;
-            toTarget.y = 0;
-            Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
-            return (desiredVelocity - currentVelocity);
-        }
-        else
-        {
-            return Vector3.zero;
-        }
-    }
-    
+				transform.position += currentVelocity * Time.deltaTime;
+				agent.velocity = currentVelocity;
+
+				if (currentVelocity != Vector3.zero)
+				{
+					transform.rotation = Quaternion.LookRotation(currentVelocity);
+				}
+			}
+		}
+		else
+		{
+			Debug.Log(this.gameObject.name + " - reach the last waypoint");
+			/*ps.takeDamage(1);*/
+			Destroy(this.gameObject);
+		}
+	}
+
+	Vector3 Seek()
+	{
+		if (currentWaypoint != totalWaypoint)
+		{
+			Vector3 toTarget = target.position - transform.position;
+			toTarget.y = 0;
+			Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
+			return (desiredVelocity - currentVelocity);
+		}
+		else
+		{
+			return Vector3.zero;
+		}
+	}
+
 
 }
