@@ -4,16 +4,16 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovement : MonoBehaviour
+public class TEST_EnemyMovement : MonoBehaviour
 {
-    private Transform target;
-    private int currentWaypoint = 0;
-    private int totalWaypoint = 0;
+	private Transform target;
+	private int currentWaypoint = 0;
+	private int totalWaypoint = 0;
 
-    [SerializeField] private float minDistance = 5.0f;
-    
-    private NavMeshAgent agent;
-    /*
+	[SerializeField] private float minDistance = 1.0f;
+
+	private NavMeshAgent agent;
+	/*
     private GameObject obj;
     private PlayerStatus ps;
     */
@@ -26,7 +26,6 @@ public class EnemyMovement : MonoBehaviour
 
 	private void Start()
 	{
-
 		agent = GetComponent<NavMeshAgent>();
 		target = WayPoints.waypoints[currentWaypoint];
 		totalWaypoint = WayPoints.waypoints.Count;
@@ -48,15 +47,14 @@ public class EnemyMovement : MonoBehaviour
 		{
 			minDistance = 1.0f;
 		}
-
+		//SetWaypoints(waypoints);
 		if (currentWaypoint != totalWaypoint)
 		{
 			target = WayPoints.waypoints[currentWaypoint];
 			agent.SetDestination(target.position);
 
-			if (Vector3.Distance(transform.position, target.position) < minDistance)
+			if (Vector3.Distance(transform.position, target.position) <= minDistance)
 			{
-
 				currentWaypoint++;
 
 				Vector3 steeringForce = Seek();
@@ -84,17 +82,10 @@ public class EnemyMovement : MonoBehaviour
 
 	Vector3 Seek()
 	{
-		if (currentWaypoint != totalWaypoint)
-		{
-			Vector3 toTarget = target.position - transform.position;
-			toTarget.y = 0;
-			Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
-			return (desiredVelocity - currentVelocity);
-		}
-		else
-		{
-			return Vector3.zero;
-		}
+		Vector3 toTarget = target.position - transform.position;
+		toTarget.y = 0;
+		Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
+		return (desiredVelocity - currentVelocity);
 	}
 
 

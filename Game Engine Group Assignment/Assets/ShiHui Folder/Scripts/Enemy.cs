@@ -6,10 +6,10 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] public int health = 100;
-    private NavMeshAgent agent;
-    private Renderer renderer;
-    /*
+	[SerializeField] public int health = 100;
+	private NavMeshAgent agent;
+	private Renderer renderer;
+	/*
     private GameObject obj;
     private PlayerStatus ps;
     */
@@ -18,22 +18,22 @@ public class Enemy : MonoBehaviour
     Animator animator;
 
 
-    [SerializeField] int reward;
+	[SerializeField] int reward;
 
-    public enum EnemyType
-    {
-        GROUND,
-        AIR
-    } 
+	public enum EnemyType
+	{
+		GROUND,
+		AIR
+	}
 
     //public EnemyType enemyType = EnemyType.GROUND;
     public EnemyType enemyType;
 
-    private void Start()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        renderer = GetComponent<Renderer>();
-        /*
+	private void Start()
+	{
+		agent = GetComponent<NavMeshAgent>();
+		renderer = GetComponent<Renderer>();
+		/*
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
         */
@@ -88,4 +88,10 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+	public void Die()
+	{
+		// add money 
+		/*ps.enemyReward(reward);*/
+		Destroy(gameObject);
+	}
 }
