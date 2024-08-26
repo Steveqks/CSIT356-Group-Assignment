@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // spawner for multiple enemies
-public class Spawner_Advance : MonoBehaviour
+public class WaveManager : MonoBehaviour
 {
 	[System.Serializable]
 	public class WaveContent
@@ -11,7 +11,7 @@ public class Spawner_Advance : MonoBehaviour
 		// enemy included for the wave
 		public Enemy enemy;
 		public int maxCount;
-		private int currCount;
+		private int currCount = 0;
 
 		public int GetCurrentCount()
 		{
@@ -156,26 +156,47 @@ public class Spawner_Advance : MonoBehaviour
 
 	void SpawnEnemy(List<WaveContent> waveContents, Transform sp)
 	{
-		// get random enemy
-		int no = getRandomNo(waveContents.Count);
-		WaveContent wc = waveContents[no];
-		Enemy enemy = wc.enemy;
+		bool MaxReached;
+		Enemy enemy;
 
-		if (wc.GetCurrentCount() <= waveContents[no].maxCount)
+		// loop until random enemy has not reached max count
+		do
 		{
+			// get random enemy
+			int no = getRandomNo(waveContents.Count);
+			WaveContent wc = waveContents[no];
+			enemy = wc.enemy;
 
-		}
-		else
-		{
-			//
-		}
+			// check if max count of enemy type reached
+			if (wc.GetCurrentCount() <= wc.maxCount)
+			{
+				wc.AddCount();
+				MaxReached = false;
+			}
+			else
+			{
+				MaxReached = true;
+			}
+
+		} while (MaxReached);
 
 		// spawns enemy facing the correct direction (default 90 degrees)
 		// edit or remove this if enemy spawns facing wrong direction.
 		Quaternion rotation = Quaternion.Euler(0, angle, 0);
 
+		Vector3 pos;
+
+		if (enemy.enemyType == Enemy.EnemyType.GROUND)
+		{
+			pos = sp.position;
+		}
+		else
+		{
+			float y = 15.0f;
+			pos = new Vector3(sp.position.x, y, sp.position.z);
+		}
 		// spawns the enemy object
-		Instantiate(wc.enemy, sp.position, rotation);
+		Instantiate(enemy, pos, rotation);
 	}
 
 	Transform GetSpawnPoint()
