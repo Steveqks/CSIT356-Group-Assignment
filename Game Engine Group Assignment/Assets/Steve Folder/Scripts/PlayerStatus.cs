@@ -8,6 +8,8 @@ public class PlayerStatus : MonoBehaviour
 {
     [SerializeField] private int playerLives = 0;
     [SerializeField] private int playerMoney = 0;
+    [SerializeField] private AudioSource CheatsSfx;
+    [SerializeField] private AudioSource GameOverSfx;
 
     // used for updating lives being displayed on player UI
     private GameObject playerLivesTMP;
@@ -84,6 +86,14 @@ public class PlayerStatus : MonoBehaviour
     {
         playerLives -= value;
         textLives.text = playerLives.ToString();
+
+        if (playerLives <= 0)
+        {
+            //game over scene
+
+            //game over sfx
+            GameOverSfx.Play();
+        }
     }
 
     public void enemyReward(int value)
@@ -145,7 +155,8 @@ public class PlayerStatus : MonoBehaviour
             // set to display lives and money 
             textMoney.SetText(playerMoney.ToString());
             textLives.SetText(playerLives.ToString());
-
+            // audio feedback "cheatcode activated"
+            CheatsSfx.Play();
         }
     }
 

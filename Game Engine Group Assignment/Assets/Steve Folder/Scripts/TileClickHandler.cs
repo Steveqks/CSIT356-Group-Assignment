@@ -22,6 +22,9 @@ public class TileClickHandler : MonoBehaviour
     // for Tile Options Menu, for storing temporary information.
     [SerializeField] private TileOption tileOption;
 
+    // for Tile Options Menu, for storing temporary information.
+    [SerializeField] private AudioSource clickSfx;
+
     // for hover effect
     private MeshRenderer meshRenderer;
 
@@ -58,5 +61,7 @@ public class TileClickHandler : MonoBehaviour
         tileOption.loadStatus(tileInfo.getTileInfo());
 
         selector.tiletoclose(tileInfo);
+
+        clickSfx.Play();
     }
 }
