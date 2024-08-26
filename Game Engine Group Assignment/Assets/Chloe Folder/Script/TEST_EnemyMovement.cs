@@ -26,7 +26,6 @@ public class TEST_EnemyMovement : MonoBehaviour
 
 	private void Start()
 	{
-
 		agent = GetComponent<NavMeshAgent>();
 		target = WayPoints.waypoints[currentWaypoint];
 		totalWaypoint = WayPoints.waypoints.Count;
@@ -51,6 +50,7 @@ public class TEST_EnemyMovement : MonoBehaviour
 		//SetWaypoints(waypoints);
 		if (currentWaypoint != totalWaypoint)
 		{
+			target = WayPoints.waypoints[currentWaypoint];
 			agent.SetDestination(target.position);
 
 			if (Vector3.Distance(transform.position, target.position) <= minDistance)
@@ -82,17 +82,10 @@ public class TEST_EnemyMovement : MonoBehaviour
 
 	Vector3 Seek()
 	{
-		if (currentWaypoint != totalWaypoint)
-		{
-			Vector3 toTarget = target.position - transform.position;
-			toTarget.y = 0;
-			Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
-			return (desiredVelocity - currentVelocity);
-		}
-		else
-		{
-			return Vector3.zero;
-		}
+		Vector3 toTarget = target.position - transform.position;
+		toTarget.y = 0;
+		Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
+		return (desiredVelocity - currentVelocity);
 	}
 
 
