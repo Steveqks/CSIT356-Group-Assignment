@@ -14,7 +14,9 @@ public class Enemy : MonoBehaviour
     private PlayerStatus ps;
     */
 
-	public ParticleSystem blood;
+    public ParticleSystem blood;
+    Animator animator;
+
 
 	[SerializeField] int reward;
 
@@ -24,7 +26,8 @@ public class Enemy : MonoBehaviour
 		AIR
 	}
 
-	public EnemyType enemyType = EnemyType.GROUND;
+    //public EnemyType enemyType = EnemyType.GROUND;
+    public EnemyType enemyType;
 
 	private void Start()
 	{
@@ -34,33 +37,56 @@ public class Enemy : MonoBehaviour
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
         */
-	}
 
-	private void Update()
-	{
-		if (health <= 0)
-		{
-			Die();
-		}
-		else if (health <= 20)
-		{
-			// change color 
-			renderer.material.color = Color.red;
-			agent.speed = 8;
-		}
-		else if (health <= 50)
-		{
-			// change color 
-			renderer.material.color = Color.yellow;
-		}
-	}
-	public void Damage(int damage)
-	{
-		// particle - blood 
-		Instantiate(blood, transform.position, Quaternion.identity);
+        animator = GetComponent<Animator>();
+    }
 
-		health -= damage;
-	}
+    private void Update()
+    {
+        if (enemyType == EnemyType.GROUND)
+        {
+            animator.Play("Run");
+        } 
+        else if (enemyType == EnemyType.AIR) {
+            animator.Play("Fly");
+        }
+        
+
+        if (health <= 0)
+        {
+            Die();
+        }
+        else if (health <= 20)
+        {
+            // change color 
+            renderer.material.color = Color.red;
+            agent.speed = 8;
+        }
+        else if (health <= 50)
+        {
+            // change color 
+            renderer.material.color = Color.yellow;
+        }
+    }
+    public void Damage(int damage)
+    {
+        animator.Play("Hit");
+
+        // particle - blood 
+        Instantiate(blood, transform.position, Quaternion.identity);
+
+        health -= damage;
+    }
+
+    public void Die()
+    {
+        animator.Play("Death");
+
+        // add money 
+        /*ps.enemyReward(reward);*/
+
+        Destroy(gameObject);
+    }
 
 	public void Die()
 	{
