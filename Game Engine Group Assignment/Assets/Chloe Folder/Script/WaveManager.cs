@@ -192,7 +192,7 @@ public class WaveManager : MonoBehaviour
 		}
 		else
 		{
-			float y = 15.0f;
+			float y = sp.position.y + 15.0f;
 			pos = new Vector3(sp.position.x, y, sp.position.z);
 		}
 		// spawns the enemy object
