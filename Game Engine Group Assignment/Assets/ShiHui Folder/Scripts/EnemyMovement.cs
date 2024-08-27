@@ -6,14 +6,14 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private Transform target;
-    private int currentWaypoint = 0;
-    private int totalWaypoint = 0;
+	private Transform target;
+	private int currentWaypoint = 0;
+	private int totalWaypoint = 0;
 
-    [SerializeField] private float minDistance = 5.0f;
-    
-    private NavMeshAgent agent;
-    /*
+	[SerializeField] private float minDistance = 5.0f;
+
+	private NavMeshAgent agent;
+	/*
     private GameObject obj;
     private PlayerStatus ps;
     */
@@ -38,17 +38,6 @@ public class EnemyMovement : MonoBehaviour
 
 	private void Update()
 	{
-		Enemy enemy = agent.GetComponent<Enemy>();
-
-		if (enemy.enemyType == Enemy.EnemyType.AIR)
-		{
-			minDistance = 15.0f;
-		}
-		else
-		{
-			minDistance = 1.0f;
-		}
-
 		if (currentWaypoint != totalWaypoint)
 		{
 			target = WayPoints.waypoints[currentWaypoint];
