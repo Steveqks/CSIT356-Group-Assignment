@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -89,7 +90,8 @@ public class PlayerStatus : MonoBehaviour
 
         if (playerLives <= 0)
         {
-            //game over scene
+            SceneManager.LoadScene("Game Over Scene");
+            //game over scene is loaded
 
             //game over sfx
             GameOverSfx.Play();
@@ -177,5 +179,7 @@ public class PlayerStatus : MonoBehaviour
         }
         return KeyCode.None;
     }
+
+    
 
 }
