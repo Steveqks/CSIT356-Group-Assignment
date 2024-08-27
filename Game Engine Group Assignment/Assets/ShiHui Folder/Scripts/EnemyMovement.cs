@@ -38,38 +38,43 @@ public class EnemyMovement : MonoBehaviour
 
 	private void Update()
 	{
-		//SetWaypoints(waypoints);
-		if (currentWaypoint != totalWaypoint)
+		// check if agent is alrdy moving, and its distance to the waypoint
+		if (!agent.pathPending && agent.remainingDistance <= minDistance)
 		{
-			target = WayPoints.waypoints[currentWaypoint];
-			agent.SetDestination(target.position);
-
-			if (Vector3.Distance(transform.position, target.position) < minDistance)
-			{
-
-				currentWaypoint++;
-
-				Vector3 steeringForce = Seek();
-				Vector3 acceleration = steeringForce / mass;
-
-				currentVelocity += acceleration * Time.deltaTime;
-				currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed);
-
-				transform.position += currentVelocity * Time.deltaTime;
-				agent.velocity = currentVelocity;
-
-				if (currentVelocity != Vector3.zero)
-				{
-					transform.rotation = Quaternion.LookRotation(currentVelocity);
-				}
-			}
+			// set the next waypoint
+			GetNextWaypoint();
 		}
-		else
+	}
+
+	void GetNextWaypoint()
+	{
+
+		if (currentWaypoint >= totalWaypoint)
 		{
 			Debug.Log(this.gameObject.name + " - reach the last waypoint");
 			/*ps.takeDamage(1);*/
 			Destroy(this.gameObject);
+			return;
 		}
+
+		target = WayPoints.waypoints[currentWaypoint];
+		agent.SetDestination(target.position);
+
+		Vector3 steeringForce = Seek();
+		Vector3 acceleration = steeringForce / mass;
+
+		currentVelocity += acceleration * Time.deltaTime;
+		currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed);
+
+		transform.position += currentVelocity * Time.deltaTime;
+		agent.velocity = currentVelocity;
+
+		if (currentVelocity != Vector3.zero)
+		{
+			transform.rotation = Quaternion.LookRotation(currentVelocity);
+		}
+
+		currentWaypoint++;
 	}
 
 	Vector3 Seek()
@@ -79,6 +84,4 @@ public class EnemyMovement : MonoBehaviour
 		Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
 		return (desiredVelocity - currentVelocity);
 	}
-
-
 }

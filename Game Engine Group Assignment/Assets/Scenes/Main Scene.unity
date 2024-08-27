@@ -560,16 +560,16 @@ MonoBehaviour:
     waveContents:
     - enemy: {fileID: -5262872199036024000, guid: 0119cb65c36fa4c4cae38c48878dd106,
         type: 3}
-      maxCount: 5
+      maxCount: 10
     - enemy: {fileID: -2621641242318012767, guid: 7dabece4c64ceb3418519bf8301dff76,
         type: 3}
-      maxCount: 10
+      maxCount: 3
     - enemy: {fileID: 2675726354213164356, guid: e67d1d70592ed3442ba181155d866068,
         type: 3}
       maxCount: 4
     - enemy: {fileID: 1255091430649471564, guid: e00d6b2b7a5a9d54089503f73381039c,
         type: 3}
-      maxCount: 2
+      maxCount: 5
     spawnRate: 2
   timeToNextWave: 3
 --- !u!1001 &87360946
@@ -1636,7 +1636,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
-  m_LocalPosition: {x: 0, y: 80, z: -40}
+  m_LocalPosition: {x: 0, y: 90, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1700,8 +1700,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panSpeed: 5
   panLimit: {x: 45, y: 45, z: 60, w: 35}
-  minZoom: 25
-  maxZoom: 80
+  minZoom: 30
+  maxZoom: 90
   zoomSpeed: 5
   scrollSpeed: 50
   smooth: 0.25
@@ -3992,7 +3992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9485b0c79d11e2e4d0007da98d76c639, type: 3}
       propertyPath: m_LocalScale.x
-      value: 9.128473
+      value: 8.5837345
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9485b0c79d11e2e4d0007da98d76c639, type: 3}
       propertyPath: m_LocalScale.z
@@ -4000,7 +4000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9485b0c79d11e2e4d0007da98d76c639, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.6983
+      value: -19.5652
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9485b0c79d11e2e4d0007da98d76c639, type: 3}
       propertyPath: m_LocalPosition.y
