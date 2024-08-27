@@ -8,8 +8,8 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     public Transform cannonStart;
     public GameObject particleSysPrefab;
     //private float cannonImpulse = 5.0f;
-    public float radius = 5.0f;
-    public float power = 10.0f;
+/*    public float radius = 5.0f;
+    public float power = 10.0f;*/
 
     public float fireRate = 1.0f;
     public float range = 10.0f;
@@ -18,6 +18,7 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     bool canShoot = true;
 
     private MeshRenderer showRangeMeshRenderer;
+    private Transform targetEnemy;
 
     /*    public float throwCooldown = 1.0f;
         private float lastThrowTime = 0f;*/
@@ -72,14 +73,30 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     {
         if (canShoot)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
-            foreach (Collider collider in hitColliders)
+            if (targetEnemy == null || !IsTargetInRange())
             {
-                if (collider.CompareTag("Enemy"))
-                {
-                    StartCoroutine(shootProjectile(collider.transform));
-                    canShoot = false;
-                }
+                FindNewTarget();
+            }
+            if (targetEnemy != null)
+            {
+                StartCoroutine(shootProjectile(targetEnemy));
+                canShoot = false;
+            }
+        }
+    }
+    private bool IsTargetInRange()
+    {
+        return Vector3.Distance(transform.position, targetEnemy.position) <= range;
+    }
+    private void FindNewTarget()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+        foreach (Collider collider in hitColliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                targetEnemy = collider.transform;
+                break;
             }
         }
     }

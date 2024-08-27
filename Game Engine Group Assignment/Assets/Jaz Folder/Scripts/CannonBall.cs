@@ -51,16 +51,16 @@ public class CannonBall : MonoBehaviour
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-            if(rb != null)
+            if (rb != null)
             {
                 GameObject gObj = hit.transform.gameObject;
                 EnemyBehaviour enemy = gObj.GetComponent<EnemyBehaviour>();
 
-                if(enemy != null)
+                if (enemy != null)
                 {
                     enemy.health = enemy.health - 50;
 
-                    if(enemy.health <= 0)
+                    if (enemy.health <= 0)
                     {
                         Destroy(enemy);
                     }

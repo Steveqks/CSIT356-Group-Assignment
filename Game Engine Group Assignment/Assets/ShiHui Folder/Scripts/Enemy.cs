@@ -110,6 +110,7 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Cannon"))
         {
             Debug.Log("HIT HIT HIT");
+			Damage(40);
             //navMesh.speed += speedIncrement;
             Destroy(other.gameObject);
         }
