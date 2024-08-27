@@ -6,85 +6,82 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private Transform target;
-    private int currentWaypoint = 0;
-    private int totalWaypoint = 0;
+	private Transform target;
+	private int currentWaypoint = 0;
+	private int totalWaypoint = 0;
 
-    [SerializeField] private float minDistance = 5.0f;
-    
-    private NavMeshAgent agent;
-    /*
+	[SerializeField] private float minDistance = 5.0f;
+
+	private NavMeshAgent agent;
+	/*
     private GameObject obj;
     private PlayerStatus ps;
     */
 
-    public float maxSpeed = 10.0f;
+	public float maxSpeed = 10.0f;
 
-    public float mass = 1.0f;
-    private Vector3 currentVelocity = Vector3.zero;
+	public float mass = 1.0f;
+	private Vector3 currentVelocity = Vector3.zero;
 
-    
-    private void Start()
-    {
 
-        agent = GetComponent<NavMeshAgent>();
-        target = WayPoints.waypoints[currentWaypoint];
-        totalWaypoint = WayPoints.waypoints.Count;
-        /*
+	private void Start()
+	{
+
+		agent = GetComponent<NavMeshAgent>();
+		target = WayPoints.waypoints[currentWaypoint];
+		totalWaypoint = WayPoints.waypoints.Count;
+		/*
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
         */
-    }
+	}
 
-    private void Update()
-    {
-        //SetWaypoints(waypoints);
-        if (currentWaypoint != totalWaypoint)
-        {
-            agent.SetDestination(target.position);
+	private void Update()
+	{
+		// check if agent is alrdy moving, and its distance to the waypoint
+		if (!agent.pathPending && agent.remainingDistance <= minDistance)
+		{
+			// set the next waypoint
+			GetNextWaypoint();
+		}
+	}
 
-            if (Vector3.Distance(transform.position, target.position) < minDistance)
-            {
+	void GetNextWaypoint()
+	{
 
-                currentWaypoint++;
+		if (currentWaypoint >= totalWaypoint)
+		{
+			Debug.Log(this.gameObject.name + " - reach the last waypoint");
+			/*ps.takeDamage(1);*/
+			Destroy(this.gameObject);
+			return;
+		}
 
-                Vector3 steeringForce = Seek();
-                Vector3 acceleration = steeringForce / mass;
+		target = WayPoints.waypoints[currentWaypoint];
+		agent.SetDestination(target.position);
 
-                currentVelocity += acceleration * Time.deltaTime;
-                currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed);
+		Vector3 steeringForce = Seek();
+		Vector3 acceleration = steeringForce / mass;
 
-                transform.position += currentVelocity * Time.deltaTime;
-                agent.velocity = currentVelocity;
+		currentVelocity += acceleration * Time.deltaTime;
+		currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed);
 
-                if (currentVelocity != Vector3.zero)
-                {
-                    transform.rotation = Quaternion.LookRotation(currentVelocity);
-                }
-            }
-        }
-        else
-        {
-            Debug.Log(this.gameObject.name + " - reach the last waypoint");
-            /*ps.takeDamage(1);*/
-            Destroy(this.gameObject);
-        }
-    }
+		transform.position += currentVelocity * Time.deltaTime;
+		agent.velocity = currentVelocity;
 
-    Vector3 Seek()
-    {
-        if (currentWaypoint != totalWaypoint)
-        {
-            Vector3 toTarget = target.position - transform.position;
-            toTarget.y = 0;
-            Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
-            return (desiredVelocity - currentVelocity);
-        }
-        else
-        {
-            return Vector3.zero;
-        }
-    }
-    
+		if (currentVelocity != Vector3.zero)
+		{
+			transform.rotation = Quaternion.LookRotation(agent.velocity);
+		}
 
+		currentWaypoint++;
+	}
+
+	Vector3 Seek()
+	{
+		Vector3 toTarget = target.position - transform.position;
+		toTarget.y = 0;
+		Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
+		return (desiredVelocity - currentVelocity);
+	}
 }
