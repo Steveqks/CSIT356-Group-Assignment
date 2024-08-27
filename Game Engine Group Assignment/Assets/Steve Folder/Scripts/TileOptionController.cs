@@ -82,7 +82,7 @@ public class TileInfoOptionController : MonoBehaviour
             {
 
                 ps.towerBought(tower2BuyCost);
-                ti.setTileinfo("Cannons");
+                ti.setTileinfo("Explosives");
 
                 Debug.Log("on build2");
 
@@ -110,7 +110,7 @@ public class TileInfoOptionController : MonoBehaviour
             {
 
                 ps.towerBought(tower3BuyCost);
-                ti.setTileinfo("Sniper");
+                ti.setTileinfo("Gatling");
 
                 Debug.Log("on build3");
 
@@ -136,14 +136,14 @@ public class TileInfoOptionController : MonoBehaviour
             ps.towerSold(tower1SellCost);
         }
 
-        else if (to.getTileTowerType() == "Cannons")
+        else if (to.getTileTowerType() == "Explosives")
         {
             GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
             PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
             ps.towerSold(tower2SellCost);
         }
 
-        else if (to.getTileTowerType() == "Sniper")
+        else if (to.getTileTowerType() == "Gatling")
         {
             GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
             PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
