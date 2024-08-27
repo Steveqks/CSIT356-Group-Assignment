@@ -71,7 +71,7 @@ public class EnemyMovement : MonoBehaviour
 
 		if (currentVelocity != Vector3.zero)
 		{
-			transform.rotation = Quaternion.LookRotation(currentVelocity);
+			transform.rotation = Quaternion.LookRotation(agent.velocity);
 		}
 
 		currentWaypoint++;
