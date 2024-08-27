@@ -57,16 +57,20 @@ public class Enemy : MonoBehaviour
 		{
 			Die();
 		}
-		else if (health <= 20)
+		else if (health <= 30)
 		{
 			// change color 
 			renderer.material.color = Color.red;
-			agent.speed = 8;
+            renderer.material.SetColor("_EmissionColor", Color.red * 5.0f);
+            renderer.material.EnableKeyword("_EMISSION");
+            agent.speed = 8;
 		}
 		else if (health <= 50)
 		{
-			// change color 
-			renderer.material.color = Color.yellow;
+            // change color 
+            renderer.material.SetColor("_EmissionColor", Color.yellow * 5.0f);
+            renderer.material.EnableKeyword("_EMISSION");
+            renderer.material.color = Color.yellow;
 		}
 	}
 	public void Damage(int damage)
@@ -74,9 +78,13 @@ public class Enemy : MonoBehaviour
 		animator.Play("Hit");
 
 		// particle - blood 
-		Instantiate(blood, transform.position, Quaternion.identity);
+		// Instantiate(blood, transform.position, Quaternion.identity);
 
-		health -= damage;
+		/* JAZ EDITTED - now "Blood" disappears after awhile */
+        ParticleSystem bloodClone = Instantiate(blood, transform.position, Quaternion.identity);
+        Destroy(bloodClone, 2.0f);
+
+        health -= damage;
 	}
 
 	public void Die()
@@ -95,6 +103,7 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Projectile"))
         {
             Debug.Log("HIT HIT HIT");
+			Damage(25);
             //navMesh.speed += speedIncrement;
             Destroy(other.gameObject);
         }

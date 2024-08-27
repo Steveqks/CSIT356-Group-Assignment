@@ -19,6 +19,9 @@ public class ArrowTowerBehaviour : MonoBehaviour
     bool canShoot = true;
 
     private MeshRenderer showRangeMeshRenderer;
+    private Transform targetEnemy;
+
+
 
     /*    private void Start()
         {
@@ -27,10 +30,12 @@ public class ArrowTowerBehaviour : MonoBehaviour
     private void Start()
     {
         Transform meshRendTransform = transform.Find("showRange");
+        
 
         if (meshRendTransform != null)
         {
             showRangeMeshRenderer = meshRendTransform.GetComponent<MeshRenderer>();
+            
 
             if (showRangeMeshRenderer != null)
             {
@@ -64,14 +69,32 @@ public class ArrowTowerBehaviour : MonoBehaviour
 
         if (canShoot)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
-            foreach (Collider collider in hitColliders)
+            if (targetEnemy == null|| !IsTargetInRange())
             {
-                if (collider.CompareTag("Enemy"))
-                {
-                     StartCoroutine(shootProjectile(collider.transform));
-                     canShoot = false;
-                }
+                FindNewTarget();
+            }
+            if (targetEnemy != null)
+            {
+                StartCoroutine(shootProjectile(targetEnemy));
+                canShoot = false;
+            }
+        }
+    }
+
+    private bool IsTargetInRange()
+    {
+        return Vector3.Distance(transform.position, targetEnemy.position) <= range;
+    }
+
+    private void FindNewTarget()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+        foreach (Collider collider in hitColliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                targetEnemy = collider.transform;
+                break;
             }
         }
     }
@@ -89,25 +112,4 @@ public class ArrowTowerBehaviour : MonoBehaviour
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
     }
-
-    // GATLING TOWER SCRIPT
-
-/*    private void shootProjectile(Transform enemy)
-    {
-        if (arrowPrefab != null && arrowStart != null)
-        {
-            GameObject arrow = Instantiate(arrowPrefab, arrowStart.position, Quaternion.identity);
-            Vector3 direction = (enemy.position - arrowStart.position).normalized;
-            arrow.GetComponent<Rigidbody>().velocity = direction * range;
-        }
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            Debug.Log("Enemy IN range!");
-            shootProjectile(other.transform);
-            fireTimer = 0.0f;
-        }
-    }*/
 }
