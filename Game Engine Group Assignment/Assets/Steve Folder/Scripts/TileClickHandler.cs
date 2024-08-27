@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TileClickHandler : MonoBehaviour
 {
@@ -43,25 +44,28 @@ public class TileClickHandler : MonoBehaviour
     // This method will be called when the mouse clicks the cube
     void OnMouseDown()
     {
-        if (selector != null)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            selector.closeOption();
-            meshRenderer.enabled = true;
+            if (selector != null)
+            {
+                selector.closeOption();
+                meshRenderer.enabled = true;
+            }
+            else meshRenderer.enabled = true;
+
+
+
+            optionL1.SetActive(true);
+            optionL2.SetActive(false);
+            options.SetActive(true);
+
+            tileInfo = GetComponent<TileInfo>();
+
+            tileOption.loadStatus(tileInfo.getTileInfo());
+
+            selector.tiletoclose(tileInfo);
+
+            clickSfx.Play();
         }
-        else meshRenderer.enabled = true;
-
-
-
-        optionL1.SetActive(true);
-        optionL2.SetActive(false);
-        options.SetActive(true);
-        
-        tileInfo = GetComponent<TileInfo>();
-
-        tileOption.loadStatus(tileInfo.getTileInfo());
-
-        selector.tiletoclose(tileInfo);
-
-        clickSfx.Play();
     }
 }
