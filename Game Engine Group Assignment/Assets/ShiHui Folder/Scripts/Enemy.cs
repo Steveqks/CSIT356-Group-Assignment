@@ -14,8 +14,8 @@ public class Enemy : MonoBehaviour
     private PlayerStatus ps;
     */
 
-    public ParticleSystem blood;
-    Animator animator;
+	public ParticleSystem blood;
+	Animator animator;
 
 
 	[SerializeField] int reward;
@@ -26,8 +26,8 @@ public class Enemy : MonoBehaviour
 		AIR
 	}
 
-    //public EnemyType enemyType = EnemyType.GROUND;
-    public EnemyType enemyType;
+	//public EnemyType enemyType = EnemyType.GROUND;
+	public EnemyType enemyType;
 
 	private void Start()
 	{
@@ -38,53 +38,54 @@ public class Enemy : MonoBehaviour
         ps = obj.GetComponent<PlayerStatus>();
         */
 
-        animator = GetComponent<Animator>();
-    }
+		//animator = GetComponent<Animator>();
+	}
 
-    private void Update()
-    {
-        if (enemyType == EnemyType.GROUND)
-        {
-            animator.Play("Run");
-        } 
-        else if (enemyType == EnemyType.AIR) {
-            animator.Play("Fly");
-        }
-        
+	private void Update()
+	{
+		if (enemyType == EnemyType.GROUND)
+		{
+			//animator.Play("Run");
+		}
+		else if (enemyType == EnemyType.AIR)
+		{
+			//animator.Play("Fly");
+		}
 
-        if (health <= 0)
-        {
-            Die();
-        }
-        else if (health <= 20)
-        {
-            // change color 
-            renderer.material.color = Color.red;
-            agent.speed = 8;
-        }
-        else if (health <= 50)
-        {
-            // change color 
-            renderer.material.color = Color.yellow;
-        }
-    }
-    public void Damage(int damage)
-    {
-        animator.Play("Hit");
 
-        // particle - blood 
-        Instantiate(blood, transform.position, Quaternion.identity);
+		if (health <= 0)
+		{
+			Die();
+		}
+		else if (health <= 20)
+		{
+			// change color 
+			renderer.material.color = Color.red;
+			agent.speed = 8;
+		}
+		else if (health <= 50)
+		{
+			// change color 
+			renderer.material.color = Color.yellow;
+		}
+	}
+	public void Damage(int damage)
+	{
+		//animator.Play("Hit");
 
-        health -= damage;
-    }
+		// particle - blood 
+		Instantiate(blood, transform.position, Quaternion.identity);
 
-    public void Die()
-    {
-        animator.Play("Death");
+		health -= damage;
+	}
 
-        // add money 
-        /*ps.enemyReward(reward);*/
+	public void Die()
+	{
+		//animator.Play("Death");
 
-        Destroy(gameObject);
-    }
+		// add money 
+		/*ps.enemyReward(reward);*/
+
+		Destroy(gameObject);
+	}
 }
