@@ -61,6 +61,7 @@ public class TileInfoOptionController : MonoBehaviour
 
                 instantiatedTower = Instantiate(tower1, ti.getTransform(), Quaternion.identity);
                 ti.instantiateTowerModel(instantiatedTower);
+                instantiatedTower.transform.position += new Vector3(0, 1, 0);
             }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
@@ -81,12 +82,13 @@ public class TileInfoOptionController : MonoBehaviour
             {
 
                 ps.towerBought(tower2BuyCost);
-                ti.setTileinfo("Cannons");
+                ti.setTileinfo("Explosives");
 
                 Debug.Log("on build2");
 
                 instantiatedTower = Instantiate(tower2, ti.getTransform(), Quaternion.identity);
                 ti.instantiateTowerModel(instantiatedTower);
+                instantiatedTower.transform.position += new Vector3(0, 1, 0);
             }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
@@ -108,12 +110,13 @@ public class TileInfoOptionController : MonoBehaviour
             {
 
                 ps.towerBought(tower3BuyCost);
-                ti.setTileinfo("Sniper");
+                ti.setTileinfo("Gatling");
 
                 Debug.Log("on build3");
 
                 instantiatedTower = Instantiate(tower3, ti.getTransform(), Quaternion.identity);
                 ti.instantiateTowerModel(instantiatedTower);
+                instantiatedTower.transform.position += new Vector3(0, 1, 0);
             }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
@@ -133,14 +136,14 @@ public class TileInfoOptionController : MonoBehaviour
             ps.towerSold(tower1SellCost);
         }
 
-        else if (to.getTileTowerType() == "Cannons")
+        else if (to.getTileTowerType() == "Explosives")
         {
             GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
             PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
             ps.towerSold(tower2SellCost);
         }
 
-        else if (to.getTileTowerType() == "Sniper")
+        else if (to.getTileTowerType() == "Gatling")
         {
             GameObject playerStatus = GameObject.FindGameObjectWithTag("PlayerStatus");
             PlayerStatus ps = playerStatus.GetComponent<PlayerStatus>();
