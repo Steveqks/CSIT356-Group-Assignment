@@ -168,7 +168,7 @@ public class WaveManager : MonoBehaviour
 			enemy = wc.enemy;
 
 			// check if max count of enemy type reached
-			if (wc.GetCurrentCount() <= wc.maxCount)
+			if (wc.GetCurrentCount() < wc.maxCount)
 			{
 				wc.AddCount();
 				MaxReached = false;
@@ -182,7 +182,7 @@ public class WaveManager : MonoBehaviour
 
 		// spawns enemy facing the correct direction (default 90 degrees)
 		// edit or remove this if enemy spawns facing wrong direction.
-		Quaternion rotation = Quaternion.Euler(0, angle, 0);
+		//Quaternion rotation = Quaternion.Euler(0, angle, 0);
 
 		Vector3 pos;
 
@@ -192,11 +192,12 @@ public class WaveManager : MonoBehaviour
 		}
 		else
 		{
+			// spawn above the spawn point
 			float y = sp.position.y + 15.0f;
 			pos = new Vector3(sp.position.x, y, sp.position.z);
 		}
 		// spawns the enemy object
-		Instantiate(enemy, pos, rotation);
+		Instantiate(enemy, pos, Quaternion.identity);
 	}
 
 	Transform GetSpawnPoint()
