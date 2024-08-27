@@ -7,7 +7,7 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     public GameObject cannonPrefab;
     public Transform cannonStart;
     public GameObject particleSysPrefab;
-    private float cannonImpulse = 5.0f;
+    //private float cannonImpulse = 5.0f;
     public float radius = 5.0f;
     public float power = 10.0f;
 

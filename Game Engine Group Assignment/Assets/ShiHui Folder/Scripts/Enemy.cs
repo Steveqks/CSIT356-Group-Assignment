@@ -89,4 +89,21 @@ public class Enemy : MonoBehaviour
 		Destroy(gameObject);
 	}
 
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Projectile"))
+        {
+            Debug.Log("HIT HIT HIT");
+            //navMesh.speed += speedIncrement;
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Cannon"))
+        {
+            Debug.Log("HIT HIT HIT");
+            //navMesh.speed += speedIncrement;
+            Destroy(other.gameObject);
+        }
+    }
+
 }
