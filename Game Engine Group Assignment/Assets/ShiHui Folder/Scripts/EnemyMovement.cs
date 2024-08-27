@@ -84,17 +84,10 @@ public class EnemyMovement : MonoBehaviour
 
 	Vector3 Seek()
 	{
-		if (currentWaypoint != totalWaypoint)
-		{
-			Vector3 toTarget = target.position - transform.position;
-			toTarget.y = 0;
-			Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
-			return (desiredVelocity - currentVelocity);
-		}
-		else
-		{
-			return Vector3.zero;
-		}
+		Vector3 toTarget = target.position - transform.position;
+		toTarget.y = 0;
+		Vector3 desiredVelocity = toTarget.normalized * maxSpeed;
+		return (desiredVelocity - currentVelocity);
 	}
 
 
