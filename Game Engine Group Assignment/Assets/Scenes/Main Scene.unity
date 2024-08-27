@@ -793,6 +793,12 @@ PrefabInstance:
       objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 8717095977604515800, guid: 48ddf21902483f0428bf304ec14e2896,
         type: 3}
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 8717095977604515800, guid: 48ddf21902483f0428bf304ec14e2896,
+        type: 3}
       propertyPath: m_Name
       value: Walkable_Path (19)
       objectReference: {fileID: 0}

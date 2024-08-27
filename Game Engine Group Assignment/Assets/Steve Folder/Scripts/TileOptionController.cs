@@ -61,6 +61,7 @@ public class TileInfoOptionController : MonoBehaviour
 
                 instantiatedTower = Instantiate(tower1, ti.getTransform(), Quaternion.identity);
                 ti.instantiateTowerModel(instantiatedTower);
+                instantiatedTower.transform.position += new Vector3(0, 1, 0);
             }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
@@ -87,6 +88,7 @@ public class TileInfoOptionController : MonoBehaviour
 
                 instantiatedTower = Instantiate(tower2, ti.getTransform(), Quaternion.identity);
                 ti.instantiateTowerModel(instantiatedTower);
+                instantiatedTower.transform.position += new Vector3(0, 1, 0);
             }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
@@ -114,6 +116,7 @@ public class TileInfoOptionController : MonoBehaviour
 
                 instantiatedTower = Instantiate(tower3, ti.getTransform(), Quaternion.identity);
                 ti.instantiateTowerModel(instantiatedTower);
+                instantiatedTower.transform.position += new Vector3(0, 1, 0);
             }
         }
         else Debug.Log("Tile already occupied by a tower, sell a tower first");
