@@ -87,11 +87,4 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-	public void Die()
-	{
-		// add money 
-		/*ps.enemyReward(reward);*/
-		Destroy(gameObject);
-	}
 }
