@@ -6,86 +6,86 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-	[SerializeField] public int health = 100;
-	private NavMeshAgent agent;
-	private Renderer renderer;
-	/*
+    [SerializeField] public int health = 100;
+    private NavMeshAgent agent;
+    private Renderer renderer;
+    /*
     private GameObject obj;
     private PlayerStatus ps;
     */
 
-	public ParticleSystem blood;
-	Animator animator;
+    public ParticleSystem blood;
+    Animator animator;
 
 
-	[SerializeField] int reward;
+    [SerializeField] int reward;
 
-	public enum EnemyType
-	{
-		GROUND,
-		AIR
-	}
+    public enum EnemyType
+    {
+        GROUND,
+        AIR
+    } 
 
-	//public EnemyType enemyType = EnemyType.GROUND;
-	public EnemyType enemyType;
+    //public EnemyType enemyType = EnemyType.GROUND;
+    public EnemyType enemyType;
 
-	private void Start()
-	{
-		agent = GetComponent<NavMeshAgent>();
-		renderer = GetComponent<Renderer>();
-		/*
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        renderer = GetComponent<Renderer>();
+        /*
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
         */
 
-		//animator = GetComponent<Animator>();
-	}
+        animator = GetComponent<Animator>();
+    }
 
-	private void Update()
-	{
-		if (enemyType == EnemyType.GROUND)
-		{
-			//animator.Play("Run");
-		}
-		else if (enemyType == EnemyType.AIR)
-		{
-			//animator.Play("Fly");
-		}
+    private void Update()
+    {
+        if (enemyType == EnemyType.GROUND)
+        {
+            animator.Play("Run");
+        } 
+        else if (enemyType == EnemyType.AIR) {
+            animator.Play("Fly");
+        }
+        
 
+        if (health <= 0)
+        {
+            Die();
+        }
+        else if (health <= 20)
+        {
+            // change color 
+            renderer.material.color = Color.red;
+            agent.speed = 8;
+        }
+        else if (health <= 50)
+        {
+            // change color 
+            renderer.material.color = Color.yellow;
+        }
+    }
+    public void Damage(int damage)
+    {
+        animator.Play("Hit");
 
-		if (health <= 0)
-		{
-			Die();
-		}
-		else if (health <= 20)
-		{
-			// change color 
-			renderer.material.color = Color.red;
-			agent.speed = 8;
-		}
-		else if (health <= 50)
-		{
-			// change color 
-			renderer.material.color = Color.yellow;
-		}
-	}
-	public void Damage(int damage)
-	{
-		//animator.Play("Hit");
+        // particle - blood 
+        Instantiate(blood, transform.position, Quaternion.identity);
 
-		// particle - blood 
-		Instantiate(blood, transform.position, Quaternion.identity);
+        health -= damage;
+    }
 
-		health -= damage;
-	}
+    public void Die()
+    {
+        animator.Play("Death");
 
-	public void Die()
-	{
-		//animator.Play("Death");
+        // add money 
+        /*ps.enemyReward(reward);*/
 
-		// add money 
-		/*ps.enemyReward(reward);*/
+        Destroy(gameObject);
+    }
 
-		Destroy(gameObject);
-	}
 }
