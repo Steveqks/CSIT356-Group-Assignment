@@ -1362,7 +1362,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Attack Of The Ancients
+  m_text: Attack On Towers
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9f19242770915024d9a43500985e1af2, type: 2}
   m_sharedMaterial: {fileID: 5741804767133455127, guid: 9f19242770915024d9a43500985e1af2,
