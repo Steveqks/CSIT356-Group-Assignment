@@ -43,13 +43,13 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (enemyType == EnemyType.GROUND)
+/*        if (enemyType == EnemyType.GROUND)
         {
             animator.Play("Run");
         } 
         else if (enemyType == EnemyType.AIR) {
             animator.Play("Fly");
-        }
+        }*/
         
 
         if (health <= 0)
