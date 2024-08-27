@@ -566,8 +566,11 @@ MonoBehaviour:
       maxCount: 10
     - enemy: {fileID: 3656354561892517481, guid: 7f8f80d8d6599b74e9c90633e8faff94,
         type: 3}
-      maxCount: 10
-    spawnRate: 1.5
+      maxCount: 4
+    - enemy: {fileID: 7910884697926490128, guid: dd3252a166195ca4e9b7a71d2c9b2a41,
+        type: 3}
+      maxCount: 2
+    spawnRate: 2
   timeToNextWave: 3
 --- !u!1001 &87360946
 PrefabInstance:
