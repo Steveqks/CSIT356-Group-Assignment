@@ -11,9 +11,12 @@ public class GatlingTowerBehaviour : MonoBehaviour
     public float range = 10.0f;
     public float lifetime = 3.0f;
 
+    bool canShoot = true;
+
     private float fireTimer;
 
     private MeshRenderer showRangeMeshRenderer;
+    private Transform targetEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +59,19 @@ public class GatlingTowerBehaviour : MonoBehaviour
     void Update()
     {
         fireTimer += Time.deltaTime;
+
+        if (canShoot)
+        {
+            if (targetEnemy == null || !IsTargetInRange())
+            {
+                FindNewTarget();
+            }
+            if (targetEnemy != null)
+            {
+                shootProjectile(targetEnemy);
+                canShoot = false;
+            }
+        }
     }
     private void shootProjectile(Transform enemy)
     {
@@ -83,5 +99,21 @@ public class GatlingTowerBehaviour : MonoBehaviour
         {
             Debug.Log("test test test");
         }
+    }
+    private void FindNewTarget()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+        foreach (Collider collider in hitColliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                targetEnemy = collider.transform;
+                break;
+            }
+        }
+    }
+    private bool IsTargetInRange()
+    {
+        return Vector3.Distance(transform.position, targetEnemy.position) <= range;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ExplosiveTowerBehaviour : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     public float fireRate = 1.0f;
     public float range = 10.0f;
     public float lifetime = 3.0f;
+
+    public float explosionRadius = 5.0f; // Radius of the explosion
+    public int explosionDamage = 50; // Damage caused by the explosion
 
     bool canShoot = true;
 
@@ -29,7 +33,16 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
             GameObject cannon = Instantiate(cannonPrefab, cannonStart.position, Quaternion.identity);
             cannon.transform.LookAt(enemy.position);
             Vector3 direction = (enemy.position - cannonStart.position).normalized;
-            cannon.GetComponent<Rigidbody>().velocity = direction * range;
+
+            Rigidbody cannonBall = cannon.GetComponent<Rigidbody>();
+            cannonBall.velocity = direction * range;
+
+            // Add a script to handle the explosion when the cannonball collides
+            CannonBall explosionScript = cannon.AddComponent<CannonBall>();
+            explosionScript.explosionRadius = explosionRadius;
+            explosionScript.explosionDamage = explosionDamage;
+            explosionScript.particleSysPrefab = particleSysPrefab;
+
             Destroy(cannon, lifetime);
         }
         yield return new WaitForSeconds(fireRate);
