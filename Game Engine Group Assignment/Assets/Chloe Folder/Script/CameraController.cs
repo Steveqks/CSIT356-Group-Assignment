@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 	// speed of camera movement
 	public float panSpeed = 5.0f;
 	// limit the panning
-	public Vector2 panLimit;
+	public Vector4 panLimit;
 
 	// for camera zoom
 	public float minZoom = 15.0f;
@@ -63,9 +63,9 @@ public class CameraController : MonoBehaviour
 			zoomY -= AddSpeed(zoomSpeed);
 		}
 
-		// limit camera pan
-		camPos.z = Mathf.Clamp(panZ, -panLimit.y, panLimit.y);
-		camPos.x = Mathf.Clamp(panX, -panLimit.x, panLimit.x);
+		// limit camera panLimit to 4 sides of the scene
+		camPos.z = Mathf.Clamp(panZ, -panLimit.z, panLimit.w);
+		camPos.x = Mathf.Clamp(panX, -panLimit.x, panLimit.y);
 
 		// limit camera zoom
 		camPos.y = Mathf.Clamp(zoomY, minZoom, maxZoom);
