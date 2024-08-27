@@ -16,8 +16,8 @@ public class EnemyController : MonoBehaviour
 	private float mass = 1.0f;
 	Vector3 currentVelo = Vector3.zero;
 
-	private bool isMoving = true;
-	private int movingCount = 0;
+	//private bool isMoving = true;
+	//private int movingCount = 0;
 
 	void Start()
 	{

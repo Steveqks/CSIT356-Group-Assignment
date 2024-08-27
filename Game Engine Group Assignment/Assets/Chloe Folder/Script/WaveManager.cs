@@ -182,7 +182,7 @@ public class WaveManager : MonoBehaviour
 
 		// spawns enemy facing the correct direction (default 90 degrees)
 		// edit or remove this if enemy spawns facing wrong direction.
-		//Quaternion rotation = Quaternion.Euler(0, angle, 0);
+		Quaternion rotation = Quaternion.Euler(0, angle, 0);
 
 		Vector3 pos;
 
@@ -197,7 +197,7 @@ public class WaveManager : MonoBehaviour
 			pos = new Vector3(sp.position.x, y, sp.position.z);
 		}
 		// spawns the enemy object
-		Instantiate(enemy, pos, Quaternion.identity);
+		Instantiate(enemy, pos, rotation);
 	}
 
 	Transform GetSpawnPoint()
