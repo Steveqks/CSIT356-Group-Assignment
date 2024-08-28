@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour
 {
-	[SerializeField] public int health = 100;
+	[SerializeField] public int health;
     [SerializeField] public int reward;
 
     private NavMeshAgent agent;
