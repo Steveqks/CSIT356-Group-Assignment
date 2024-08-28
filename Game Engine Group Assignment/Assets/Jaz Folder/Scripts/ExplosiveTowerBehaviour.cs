@@ -8,9 +8,6 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     public GameObject cannonPrefab;
     public Transform cannonStart;
     public GameObject particleSysPrefab;
-    //private float cannonImpulse = 5.0f;
-/*    public float radius = 5.0f;
-    public float power = 10.0f;*/
 
     public float fireRate = 1.0f;
     public float range = 10.0f;
@@ -24,9 +21,8 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     private MeshRenderer showRangeMeshRenderer;
     private Transform targetEnemy;
     private AudioSource cannonBallSFX;
+    private Enemy enemyType;
 
-    /*    public float throwCooldown = 1.0f;
-        private float lastThrowTime = 0f;*/
     private IEnumerator shootProjectile(Transform enemy)
     {
         if (enemy != null && IsTargetInRange())
@@ -46,7 +42,8 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
                 explosionScript.explosionDamage = explosionDamage;
                 explosionScript.particleSysPrefab = particleSysPrefab;
 
-                Destroy(cannon, lifetime);
+                //Destroy(cannon, lifetime);
+                Explode(cannon);
 
                 if (cannonBall != null)
                 {
@@ -56,6 +53,30 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
         }
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
+    }
+    private void Explode(GameObject cannon)
+    {
+        // Instantiate particle effects at the explosion point
+        if (particleSysPrefab != null)
+        {
+            Instantiate(particleSysPrefab, transform.position, Quaternion.identity);
+        }
+
+        // Find all enemies within the explosion radius
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider hitCollider in hitColliders)
+        {
+            Enemy enemy = hitCollider.GetComponent<Enemy>();
+
+            // If the collider belongs to an enemy, deal damage
+            if (enemy != null)
+            {
+                enemy.Damage(explosionDamage);
+            }
+        }
+
+        // Destroy the cannonball after the explosion
+        Destroy(cannon);
     }
     private void ToggleShowRange(bool show)
     {
@@ -117,10 +138,18 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in hitColliders)
         {
-            if (collider.CompareTag("EnemyGround"))
+            if (collider.CompareTag("Enemy"))
             {
-                targetEnemy = collider.transform;
-                break;
+                enemyType = collider.gameObject.GetComponent<Enemy>();
+
+                if (enemyType != null)
+                {
+                    if (enemyType.enemyType == Enemy.EnemyType.GROUND)
+                    {
+                        targetEnemy = collider.transform;
+                        break;
+                    }
+                }
             }
         }
     }

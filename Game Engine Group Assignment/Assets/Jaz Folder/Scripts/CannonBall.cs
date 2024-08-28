@@ -2,39 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-
 public class CannonBall : MonoBehaviour
 {
-    public float explosionRadius;
-    public int explosionDamage;
+    public float explosionRadius = 5.0f;
+    public int explosionDamage = 50;
     public GameObject particleSysPrefab;
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Create explosion effect
+        // Trigger the explosion
+        Explode();
+    }
+
+    private void Explode()
+    {
+        // Instantiate particle effects at the explosion point
         if (particleSysPrefab != null)
         {
             Instantiate(particleSysPrefab, transform.position, Quaternion.identity);
         }
 
-        // Find all colliders within the explosion radius
+        // Find all enemies within the explosion radius
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider hitCollider in hitColliders)
         {
-            // Check if the collider has the "Enemy" tag
-            if (hitCollider.CompareTag("Enemy"))
+            Enemy enemy = hitCollider.GetComponent<Enemy>();
+
+            // If the collider belongs to an enemy, deal damage
+            if (enemy != null)
             {
-                Enemy enemy = hitCollider.GetComponent<Enemy>();
-                if (enemy != null)
-                {
-                    enemy.Damage(explosionDamage);
-                }
-                // Apply damage to the enemy (assuming the enemy has a method to take damage)
-                //hitCollider.GetComponent<Enemy>().Damage(explosionDamage);
+                enemy.Damage(explosionDamage);
             }
         }
+
         // Destroy the cannonball after the explosion
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

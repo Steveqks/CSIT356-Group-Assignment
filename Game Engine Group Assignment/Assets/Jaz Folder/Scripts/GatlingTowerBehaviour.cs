@@ -30,7 +30,6 @@ public class GatlingTowerBehaviour : MonoBehaviour
 
         rapidFireSFX = GetComponent<AudioSource>();
 
-        enemyType = GetComponent<Enemy>();
 
         if (meshRendTransform != null)
         {
@@ -125,6 +124,8 @@ public class GatlingTowerBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            enemyType = other.GetComponent<Enemy>();
+
             if (enemyType != null)
             {
                 if (enemyType.enemyType == Enemy.EnemyType.AIR)
@@ -150,6 +151,8 @@ public class GatlingTowerBehaviour : MonoBehaviour
         {
             if (collider.CompareTag("Enemy"))
             {
+                enemyType = collider.gameObject.GetComponent<Enemy>();
+
                 if (enemyType != null)
                 {
                     if (enemyType.enemyType == Enemy.EnemyType.AIR)
@@ -157,10 +160,7 @@ public class GatlingTowerBehaviour : MonoBehaviour
                         targetEnemy = collider.transform;
                         break;
                     }
-                    else
-                        Debug.Log("no target");
                 }
-
             }
         }
     }

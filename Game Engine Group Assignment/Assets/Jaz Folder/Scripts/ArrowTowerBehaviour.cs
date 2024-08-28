@@ -21,6 +21,7 @@ public class ArrowTowerBehaviour : MonoBehaviour
     private MeshRenderer showRangeMeshRenderer;
     private Transform targetEnemy;
     private AudioSource shootArrowSFX;
+    private Enemy enemyType;
 
 
     /*    private void Start()
@@ -92,7 +93,7 @@ public class ArrowTowerBehaviour : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in hitColliders)
         {
-            if (collider.CompareTag("EnemyAir") || collider.CompareTag("EnemyGround"))
+            if (collider.CompareTag("Enemy"))
             {
                 targetEnemy = collider.transform;
                 break;
