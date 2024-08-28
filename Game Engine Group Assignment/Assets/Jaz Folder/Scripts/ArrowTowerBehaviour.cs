@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ArrowTowerBehaviour : MonoBehaviour
@@ -91,7 +92,7 @@ public class ArrowTowerBehaviour : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in hitColliders)
         {
-            if (collider.CompareTag("Enemy"))
+            if (collider.CompareTag("EnemyAir") || collider.CompareTag("EnemyGround"))
             {
                 targetEnemy = collider.transform;
                 break;

@@ -14,7 +14,7 @@ public class GatlingTowerBehaviour : MonoBehaviour
 
     bool canShoot = true;
 
-    private float fireTimer;
+    //private float fireTimer;
 
     private MeshRenderer showRangeMeshRenderer;
     private Transform targetEnemy;
@@ -121,11 +121,11 @@ public class GatlingTowerBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("EnemyAir"))
         {
             Debug.Log("Enemy IN range!");
             shootProjectile(other.transform);
-            fireTimer = 0.0f;
+            //fireTimer = 0.0f;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -140,7 +140,7 @@ public class GatlingTowerBehaviour : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in hitColliders)
         {
-            if (collider.CompareTag("Enemy"))
+            if (collider.CompareTag("EnemyAir"))
             {
                 targetEnemy = collider.transform;
                 break;

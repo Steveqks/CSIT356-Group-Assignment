@@ -117,7 +117,7 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in hitColliders)
         {
-            if (collider.CompareTag("Enemy"))
+            if (collider.CompareTag("EnemyGround"))
             {
                 targetEnemy = collider.transform;
                 break;
