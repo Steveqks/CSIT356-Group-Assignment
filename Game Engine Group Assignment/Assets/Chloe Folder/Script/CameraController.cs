@@ -10,8 +10,8 @@ public class CameraController : MonoBehaviour
 	public Vector4 panLimit;
 
 	// for camera zoom
-	public float minZoom = 15.0f;
-	public float maxZoom = 80.0f;
+	public float minZoom;
+	public float maxZoom;
 	public float zoomSpeed = 5.0f;
 	public float scrollSpeed = 50.0f;
 	public float smooth = 0.25f;
