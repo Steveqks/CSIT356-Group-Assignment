@@ -98,11 +98,15 @@ public class ArrowTowerBehaviour : MonoBehaviour
     {
         if (canShoot)
         {
-            if (targetEnemy == null|| !IsTargetInRange())
+            if (targetEnemy == null || !IsTargetInRange())
             {
                 FindNewTarget();
             }
-            if (targetEnemy != null)
+/*            if (targetEnemy != null && !IsTargetInRange())
+            {
+                FindNewTarget();
+            }*/
+            if (targetEnemy != null && IsTargetInRange())
             {
                 StartCoroutine(shootProjectile(targetEnemy));
                 canShoot = false;
