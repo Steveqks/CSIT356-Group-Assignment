@@ -16,7 +16,6 @@ public class EnemyMovement : MonoBehaviour
 	
     private GameObject obj;
     private PlayerStatus ps;
-    
 
 	public float maxSpeed = 10.0f;
 
@@ -48,7 +47,6 @@ public class EnemyMovement : MonoBehaviour
 
 	void GetNextWaypoint()
 	{
-
 		if (currentWaypoint >= totalWaypoint)
 		{
 			Debug.Log(this.gameObject.name + " - reach the last waypoint");
@@ -73,7 +71,6 @@ public class EnemyMovement : MonoBehaviour
 		{
 			transform.rotation = Quaternion.LookRotation(agent.velocity);
 		}
-
 		currentWaypoint++;
 	}
 

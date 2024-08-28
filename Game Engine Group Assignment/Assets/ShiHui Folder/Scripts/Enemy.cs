@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 	[SerializeField] public int health = 100;
 	private NavMeshAgent agent;
 	private Renderer renderer;
-	/**/
+	
     private GameObject obj;
     private PlayerStatus ps;
     
@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
 	Animator animator;
 
 	Vector3 bloodPos;
-    //[SerializeField] int reward;
 
     public enum EnemyType
 	{
@@ -27,7 +26,6 @@ public class Enemy : MonoBehaviour
 		AIR
 	}
 
-	//public EnemyType enemyType = EnemyType.GROUND;
 	public EnemyType enemyType;
 
 	private void Start()
@@ -45,7 +43,7 @@ public class Enemy : MonoBehaviour
 	private void Update()
 	{
         bloodPos = transform.position + new Vector3(0f, 0.5f, 0f);
-
+		
         if (enemyType == EnemyType.GROUND)
 		{
 			animator.Play("Run");
@@ -54,7 +52,6 @@ public class Enemy : MonoBehaviour
 		{
 			animator.Play("Fly");
 		}
-
 
 		if (health <= 0)
 		{
@@ -78,28 +75,19 @@ public class Enemy : MonoBehaviour
 	}
 	public void Damage(int damage)
 	{
-		//animator.Play("Hit");
-
 		// particle - blood 
 		Instantiate(blood, bloodPos, Quaternion.identity);
-
-		/* JAZ EDITTED - now "Blood" disappears after awhile */
-        //ParticleSystem bloodClone = Instantiate(blood, transform.position, Quaternion.identity);
-        //Destroy(bloodClone, 2.0f);
 
         health -= damage;
 	}
 
 	public void Die()
 	{
-		animator.Play("Death");
-
 		// add money 
 		ps.enemyReward(5);
 
 		Destroy(gameObject);
 	}
-
 
     private void OnTriggerStay(Collider other)
     {
