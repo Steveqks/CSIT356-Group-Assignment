@@ -8,15 +8,17 @@ using UnityEngine.Rendering;
 public class Enemy : MonoBehaviour
 {
 	[SerializeField] public int health = 100;
+	[SerializeField] public int reward;
 	private NavMeshAgent agent;
 	private Renderer renderer;
 	
     private GameObject obj;
     private PlayerStatus ps;
     
-
 	public ParticleSystem blood;
 	Animator animator;
+
+	
 
 	Vector3 bloodPos;
 
@@ -38,6 +40,14 @@ public class Enemy : MonoBehaviour
         
 
 		animator = GetComponent<Animator>();
+
+		if (enemyType == EnemyType.GROUND)
+		{
+			reward = 1;
+		} else if (enemyType == EnemyType.AIR)
+		{
+			reward = 2;
+		}
 	}
 
 	private void Update()
@@ -84,7 +94,7 @@ public class Enemy : MonoBehaviour
 	public void Die()
 	{
 		// add money 
-		ps.enemyReward(5);
+		ps.enemyReward(reward);
 
 		Destroy(gameObject);
 	}
