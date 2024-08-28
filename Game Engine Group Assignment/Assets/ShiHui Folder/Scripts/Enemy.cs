@@ -45,19 +45,6 @@ public class Enemy : MonoBehaviour
         ps = obj.GetComponent<PlayerStatus>();
 
 		animator = GetComponent<Animator>();
-
-		if (enemySpeedType == EnemySpeedType.FAST)
-        {
-            agent.speed = 5;
-			health = 100;
-			reward = 1;
-        }
-        else if (enemySpeedType == EnemySpeedType.SLOW)
-        {
-			agent.speed = 3.5f;
-            health = 150;
-			reward = 2;
-        }
     }
 
 	private void Update()
