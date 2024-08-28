@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
 	private int currentWaypoint = 0;
 	private int totalWaypoint = 0;
 
-	[SerializeField] private float minDistance = 5.0f;
+	[SerializeField] private float minDistance = 10.0f;
 
 	private NavMeshAgent agent;
 	
