@@ -7,6 +7,7 @@ public class CannonBall : MonoBehaviour
     public float explosionRadius = 5.0f;
     public int explosionDamage = 50;
     public GameObject particleSysPrefab;
+    private Enemy enemyType;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -28,10 +29,23 @@ public class CannonBall : MonoBehaviour
         {
             Enemy enemy = hitCollider.GetComponent<Enemy>();
 
-            // If the collider belongs to an enemy, deal damage
+/*            // If the collider belongs to an enemy, deal damage
             if (enemy != null)
             {
                 enemy.Damage(explosionDamage);
+            }*/
+
+            if (hitCollider.CompareTag("Enemy"))
+            {
+                enemyType = hitCollider.gameObject.GetComponent<Enemy>();
+
+                if (enemyType != null)
+                {
+                    if (enemyType.enemyType == Enemy.EnemyType.GROUND)
+                    {
+                        enemy.Damage(explosionDamage);
+                    }
+                }
             }
         }
 
