@@ -18,8 +18,8 @@ public class GatlingTowerBehaviour : MonoBehaviour
 
     private MeshRenderer showRangeMeshRenderer;
     private Transform targetEnemy;
-
     private AudioSource rapidFireSFX;
+    private Enemy enemyType;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +29,8 @@ public class GatlingTowerBehaviour : MonoBehaviour
         Transform meshRendTransform = transform.Find("showRange");
 
         rapidFireSFX = GetComponent<AudioSource>();
+
+        enemyType = GetComponent<Enemy>();
 
         if (meshRendTransform != null)
         {
@@ -121,11 +123,17 @@ public class GatlingTowerBehaviour : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("EnemyAir"))
+        if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Enemy IN range!");
-            shootProjectile(other.transform);
-            //fireTimer = 0.0f;
+            if (enemyType != null)
+            {
+                if (enemyType.enemyType == Enemy.EnemyType.AIR)
+                {
+                    Debug.Log("Enemy IN range!");
+                    shootProjectile(other.transform);
+                    //fireTimer = 0.0f;
+                }
+            }
         }
     }
     private void OnTriggerExit(Collider other)
@@ -140,10 +148,19 @@ public class GatlingTowerBehaviour : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
         foreach (Collider collider in hitColliders)
         {
-            if (collider.CompareTag("EnemyAir"))
+            if (collider.CompareTag("Enemy"))
             {
-                targetEnemy = collider.transform;
-                break;
+                if (enemyType != null)
+                {
+                    if (enemyType.enemyType == Enemy.EnemyType.AIR)
+                    {
+                        targetEnemy = collider.transform;
+                        break;
+                    }
+                    else
+                        Debug.Log("no target");
+                }
+
             }
         }
     }
