@@ -13,7 +13,6 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     public float speed = 10.0f;
     public float lifetime = 3.0f;
 
-
     private float explosionRadius = 20.0f; // Radius of the explosion
     private int explosionDamage = 50; // Damage caused by the explosion
 
@@ -69,42 +68,6 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     {
         ToggleShowRange(false);
     }
-    private void Start()
-    {
-        Transform meshRendTransform = transform.Find("showRange");
-
-        cannonBallSFX = GetComponent<AudioSource>();
-
-        if (meshRendTransform != null)
-        {
-            showRangeMeshRenderer = meshRendTransform.GetComponent<MeshRenderer>();
-
-            if (showRangeMeshRenderer != null)
-            {
-                showRangeMeshRenderer.enabled = false;
-            }
-        }
-        else
-        {
-            Debug.LogError("showRange is not Found");
-        }
-    }
-
-    private void Update()
-    {
-        if (canShoot)
-        {
-            if (targetEnemy == null || !IsTargetInRange())
-            {
-                FindNewTarget();
-            }
-            if (targetEnemy != null)
-            {
-                StartCoroutine(shootProjectile(targetEnemy));
-                canShoot = false;
-            }
-        }
-    }
     private bool IsTargetInRange()
     {
         return Vector3.Distance(transform.position, targetEnemy.position) <= explosionRadius;
@@ -126,6 +89,41 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
                         break;
                     }
                 }
+            }
+        }
+    }
+   private void Start()
+    {
+        Transform meshRendTransform = transform.Find("showRange");
+
+        cannonBallSFX = GetComponent<AudioSource>();
+
+        if (meshRendTransform != null)
+        {
+            showRangeMeshRenderer = meshRendTransform.GetComponent<MeshRenderer>();
+
+            if (showRangeMeshRenderer != null)
+            {
+                showRangeMeshRenderer.enabled = false;
+            }
+        }
+        else
+        {
+            Debug.LogError("showRange is not Found");
+        }
+    }
+    private void Update()
+    {
+        if (canShoot)
+        {
+            if (targetEnemy == null || !IsTargetInRange())
+            {
+                FindNewTarget();
+            }
+            if (targetEnemy != null)
+            {
+                StartCoroutine(shootProjectile(targetEnemy));
+                canShoot = false;
             }
         }
     }

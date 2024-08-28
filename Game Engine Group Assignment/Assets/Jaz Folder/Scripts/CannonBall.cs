@@ -14,7 +14,6 @@ public class CannonBall : MonoBehaviour
          // Trigger the explosion
             Explode();
     }
-
     private void Explode()
     {
         // Instantiate particle effects at the explosion point
@@ -22,17 +21,14 @@ public class CannonBall : MonoBehaviour
         {
             Instantiate(particleSysPrefab, transform.position, Quaternion.identity);
         }
-
         // Find all enemies within the explosion radius
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider hitCollider in hitColliders)
         {
             Enemy enemy = hitCollider.GetComponent<Enemy>();
-            
             if (hitCollider.CompareTag("Enemy"))
             {
                 enemyType = hitCollider.gameObject.GetComponent<Enemy>();
-
                 if (enemyType != null)
                 {
                     if (enemyType.enemyType == Enemy.EnemyType.GROUND)
@@ -48,7 +44,6 @@ public class CannonBall : MonoBehaviour
                 }
             }
         }
-
         // Destroy the cannonball after the explosion
         Destroy(gameObject);
     }
