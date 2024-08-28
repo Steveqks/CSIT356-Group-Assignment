@@ -13,8 +13,8 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     public float speed = 10.0f;
     public float lifetime = 3.0f;
 
-    public float explosionRadius = 5.0f; // Radius of the explosion
-    public int explosionDamage = 50; // Damage caused by the explosion
+    private float explosionRadius = 5.0f; // Radius of the explosion
+    private int explosionDamage = 50; // Damage caused by the explosion
 
     bool canShoot = true;
 
