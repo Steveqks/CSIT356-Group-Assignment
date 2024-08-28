@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // spawner for multiple enemies
 public class WaveManager : MonoBehaviour
@@ -47,7 +48,8 @@ public class WaveManager : MonoBehaviour
 	private float countDown;
 	private float waitTime = 1.0f;
 	private int nextWave = 0;
-	private int angle = 90;
+
+	public PlayerStatus playerStatus;
 
 	void Start()
 	{
@@ -120,8 +122,13 @@ public class WaveManager : MonoBehaviour
 
 		if (nextWave + 1 > waves.Count - 1)
 		{
-			// Stage completes, goto next stage or sth
+			// Stage completes
 			Debug.Log("All waves complete");
+			if (playerStatus.getPlayerLives() > 0)
+			{
+				// switch to game win scene
+				SceneManager.LoadScene("Game Win Scene");
+			}
 		}
 		else
 		{
@@ -180,10 +187,6 @@ public class WaveManager : MonoBehaviour
 
 		} while (MaxReached);
 
-		// spawns enemy facing the correct direction (default 90 degrees)
-		// edit or remove this if enemy spawns facing wrong direction.
-		Quaternion rotation = Quaternion.Euler(0, angle, 0);
-
 		Vector3 pos;
 
 		if (enemy.enemyType == Enemy.EnemyType.GROUND)
@@ -197,7 +200,7 @@ public class WaveManager : MonoBehaviour
 			pos = new Vector3(sp.position.x, y, sp.position.z);
 		}
 		// spawns the enemy object
-		Instantiate(enemy, pos, rotation);
+		Instantiate(enemy, pos, Quaternion.identity);
 	}
 
 	Transform GetSpawnPoint()
