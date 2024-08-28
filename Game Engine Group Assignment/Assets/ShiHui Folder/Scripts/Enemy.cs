@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
 	[SerializeField] public int health;
     [SerializeField] public int reward;
 
+	private int halfHealth; 
+
     private NavMeshAgent agent;
 	private Renderer renderer;
 	
@@ -45,12 +47,14 @@ public class Enemy : MonoBehaviour
         ps = obj.GetComponent<PlayerStatus>();
 
 		animator = GetComponent<Animator>();
+		halfHealth = health / 2;
+        Debug.Log("half health: " + halfHealth);
     }
 
 	private void Update()
 	{
         bloodPos = transform.position + new Vector3(0f, 0.5f, 0f);
-		
+
         if (enemyType == EnemyType.GROUND)
 		{
 			animator.Play("Run");
@@ -71,10 +75,11 @@ public class Enemy : MonoBehaviour
 			// set speed (speed up) 
             agent.speed = 8;
 		}
-		else if (health <= 50)
+		else if (health <= halfHealth) // when reach halth health
 		{
             // change color 
             renderer.material.color = Color.yellow;
+			Debug.Log("less than half health: " + health);
 		}
 	}
 
@@ -83,6 +88,7 @@ public class Enemy : MonoBehaviour
 		// particle - blood 
 		Instantiate(blood, bloodPos, Quaternion.identity);
 
+		// deduct health
         health -= damage;
 	}
 
@@ -99,6 +105,7 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Projectile"))
         {
             Debug.Log("HIT HIT HIT");
+			// deduct health by 25
 			Damage(25);
             Destroy(other.gameObject);
         }
