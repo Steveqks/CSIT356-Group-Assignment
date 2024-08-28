@@ -622,7 +622,7 @@ MonoBehaviour:
       maxCount: 5
     spawnRate: 2
   timeToNextWave: 3
-  playerStatus: {fileID: 0}
+  playerStatus: {fileID: 359026728}
 --- !u!1001 &87360946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2124,6 +2124,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 358848707}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &359026728 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7600304094215924407, guid: 9bd23c7c63869ae499659af30863160e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1457868337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad2e518dedce564bae831a3ef76cca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &366968958
 PrefabInstance:
   m_ObjectHideFlags: 0
