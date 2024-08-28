@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public class Enemy : MonoBehaviour
 {
 	[SerializeField] public int health = 100;
 	private NavMeshAgent agent;
 	private Renderer renderer;
-	/*
+	/**/
     private GameObject obj;
     private PlayerStatus ps;
-    */
+    
 
 	public ParticleSystem blood;
 	Animator animator;
 
+	Vector3 bloodPos;
+    //[SerializeField] int reward;
 
-	[SerializeField] int reward;
-
-	public enum EnemyType
+    public enum EnemyType
 	{
 		GROUND,
 		AIR
@@ -33,17 +34,19 @@ public class Enemy : MonoBehaviour
 	{
 		agent = GetComponent<NavMeshAgent>();
 		renderer = GetComponent<Renderer>();
-		/*
+		
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
-        */
+        
 
 		animator = GetComponent<Animator>();
 	}
 
 	private void Update()
 	{
-		if (enemyType == EnemyType.GROUND)
+        bloodPos = transform.position + new Vector3(0f, 0.5f, 0f);
+
+        if (enemyType == EnemyType.GROUND)
 		{
 			animator.Play("Run");
 		}
@@ -75,14 +78,14 @@ public class Enemy : MonoBehaviour
 	}
 	public void Damage(int damage)
 	{
-		animator.Play("Hit");
+		//animator.Play("Hit");
 
 		// particle - blood 
-		// Instantiate(blood, transform.position, Quaternion.identity);
+		Instantiate(blood, bloodPos, Quaternion.identity);
 
 		/* JAZ EDITTED - now "Blood" disappears after awhile */
-        ParticleSystem bloodClone = Instantiate(blood, transform.position, Quaternion.identity);
-        Destroy(bloodClone, 2.0f);
+        //ParticleSystem bloodClone = Instantiate(blood, transform.position, Quaternion.identity);
+        //Destroy(bloodClone, 2.0f);
 
         health -= damage;
 	}
@@ -92,7 +95,7 @@ public class Enemy : MonoBehaviour
 		animator.Play("Death");
 
 		// add money 
-		/*ps.enemyReward(reward);*/
+		ps.enemyReward(5);
 
 		Destroy(gameObject);
 	}

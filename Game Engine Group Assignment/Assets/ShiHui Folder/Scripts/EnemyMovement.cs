@@ -13,10 +13,10 @@ public class EnemyMovement : MonoBehaviour
 	[SerializeField] private float minDistance = 5.0f;
 
 	private NavMeshAgent agent;
-	/*
+	
     private GameObject obj;
     private PlayerStatus ps;
-    */
+    
 
 	public float maxSpeed = 10.0f;
 
@@ -30,10 +30,10 @@ public class EnemyMovement : MonoBehaviour
 		agent = GetComponent<NavMeshAgent>();
 		target = WayPoints.waypoints[currentWaypoint];
 		totalWaypoint = WayPoints.waypoints.Count;
-		/*
+		
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
-        */
+        
 	}
 
 	private void Update()
@@ -52,7 +52,7 @@ public class EnemyMovement : MonoBehaviour
 		if (currentWaypoint >= totalWaypoint)
 		{
 			Debug.Log(this.gameObject.name + " - reach the last waypoint");
-			/*ps.takeDamage(1);*/
+			ps.takeDamage(1);
 			Destroy(this.gameObject);
 			return;
 		}
