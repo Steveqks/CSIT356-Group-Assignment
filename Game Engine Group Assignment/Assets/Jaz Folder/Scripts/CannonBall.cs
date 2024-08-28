@@ -28,12 +28,13 @@ public class CannonBall : MonoBehaviour
         foreach (Collider hitCollider in hitColliders)
         {
             Enemy enemy = hitCollider.GetComponent<Enemy>();
-
-/*            // If the collider belongs to an enemy, deal damage
-            if (enemy != null)
+            
+            // from steve
+            Rigidbody rb = hitCollider.GetComponent<Rigidbody>();
+            if (rb != null)
             {
-                enemy.Damage(explosionDamage);
-            }*/
+                rb.AddExplosionForce(20.0f, transform.position, 10.0f, 3.0f, ForceMode.Impulse);
+            }
 
             if (hitCollider.CompareTag("Enemy"))
             {
