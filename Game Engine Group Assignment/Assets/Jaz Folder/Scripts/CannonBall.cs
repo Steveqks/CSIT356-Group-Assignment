@@ -41,7 +41,7 @@ public class CannonBall : MonoBehaviour
                         Rigidbody rb = hitCollider.GetComponent<Rigidbody>();
                         if (rb != null)
                         {
-                            rb.AddExplosionForce(20.0f, transform.position, 10.0f, 0.0f, ForceMode.Impulse);
+                            rb.AddExplosionForce(10.0f, transform.position, 10.0f, 3.0f, ForceMode.Impulse);
                         }
                         enemy.Damage(explosionDamage);
                     }
