@@ -2239,7 +2239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 288330905}
   m_Layer: 0
-  m_Name: Player_Nodes
+  m_Name: LowerTiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2253,8 +2253,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288330904}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2282,7 +2282,7 @@ Transform:
   - {fileID: 709065221}
   - {fileID: 875063222}
   - {fileID: 1640667641}
-  m_Father: {fileID: 612630113}
+  m_Father: {fileID: 1230641653}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &306874408
 PrefabInstance:
@@ -4268,11 +4268,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1230641653}
   - {fileID: 1040975097}
   - {fileID: 179785578}
   - {fileID: 1006073256}
   - {fileID: 632622615}
-  - {fileID: 288330905}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &615098046
@@ -7381,14 +7381,15 @@ Transform:
   m_GameObject: {fileID: 1230641652}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 57644312}
   - {fileID: 868466767}
   - {fileID: 1243469690}
-  m_Father: {fileID: 0}
+  - {fileID: 288330905}
+  m_Father: {fileID: 612630113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1236886279 stripped
 Transform:
@@ -7406,7 +7407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1243469690}
   m_Layer: 0
-  m_Name: BG_Blocks(not playable)
+  m_Name: HigherTiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14622,7 +14623,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 85748655}
   - {fileID: 927572797}
-  - {fileID: 1230641653}
   - {fileID: 612630113}
   - {fileID: 60391736}
   - {fileID: 950558747}
