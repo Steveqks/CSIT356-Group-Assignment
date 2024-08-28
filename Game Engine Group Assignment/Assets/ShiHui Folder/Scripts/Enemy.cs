@@ -15,10 +15,10 @@ public class Enemy : MonoBehaviour
 	
     private GameObject obj;
     private PlayerStatus ps;
-    
-	public ParticleSystem blood;
-	private Animator animator;
 
+    private Animator animator;
+
+	public ParticleSystem blood;
 	private Vector3 bloodPos;
 
     public enum EnemyType
@@ -43,26 +43,20 @@ public class Enemy : MonoBehaviour
 		
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
-        
 
 		animator = GetComponent<Animator>();
 
-		if (enemyType == EnemyType.GROUND)
-		{
-			reward = 1;
-		} 
-		else if (enemyType == EnemyType.AIR)
-		{
-			reward = 2;
-		}
-
-        if (enemySpeedType == EnemySpeedType.FAST)
+		if (enemySpeedType == EnemySpeedType.FAST)
         {
             agent.speed = 5;
+			health = 100;
+			reward = 1;
         }
         else if (enemySpeedType == EnemySpeedType.SLOW)
         {
 			agent.speed = 3.5f;
+            health = 150;
+			reward = 2;
         }
     }
 
@@ -87,6 +81,7 @@ public class Enemy : MonoBehaviour
 		{
 			// change color 
 			renderer.material.color = Color.red;
+			// set speed (speed up) 
             agent.speed = 8;
 		}
 		else if (health <= 50)
@@ -95,6 +90,7 @@ public class Enemy : MonoBehaviour
             renderer.material.color = Color.yellow;
 		}
 	}
+
 	public void Damage(int damage)
 	{
 		// particle - blood 
@@ -117,14 +113,6 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("HIT HIT HIT");
 			Damage(25);
-            //navMesh.speed += speedIncrement;
-            Destroy(other.gameObject);
-        }
-        if (other.CompareTag("Cannon"))
-        {
-            Debug.Log("HIT HIT HIT");
-			//Damage(40);
-            //navMesh.speed += speedIncrement;
             Destroy(other.gameObject);
         }
     }
