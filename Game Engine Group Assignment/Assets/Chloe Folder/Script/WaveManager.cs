@@ -127,7 +127,7 @@ public class WaveManager : MonoBehaviour
 			if (playerStatus.getPlayerLives() > 0)
 			{
 				// switch to game win scene
-				SceneManager.LoadScene("Test Win Scene");
+				SceneManager.LoadScene("Game Win Scene");
 			}
 		}
 		else
