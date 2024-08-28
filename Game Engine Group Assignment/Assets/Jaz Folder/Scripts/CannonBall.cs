@@ -10,8 +10,8 @@ public class CannonBall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Trigger the explosion
-        Explode();
+         // Trigger the explosion
+            Explode();
     }
 
     private void Explode()
@@ -36,6 +36,6 @@ public class CannonBall : MonoBehaviour
         }
 
         // Destroy the cannonball after the explosion
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
