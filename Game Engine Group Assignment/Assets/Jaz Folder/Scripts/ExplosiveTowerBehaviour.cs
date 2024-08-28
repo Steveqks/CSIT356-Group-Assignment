@@ -10,7 +10,7 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     public GameObject particleSysPrefab;
 
     public float fireRate = 1.0f;
-    public float range = 10.0f;
+    public float speed = 10.0f;
     public float lifetime = 3.0f;
 
     public float explosionRadius = 5.0f; // Radius of the explosion
@@ -34,7 +34,7 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
                 Vector3 direction = (enemy.position - cannonStart.position).normalized;
 
                 Rigidbody cannonBall = cannon.GetComponent<Rigidbody>();
-                cannonBall.velocity = direction * range;
+                cannonBall.velocity = direction * speed;
 
                 // Add a script to handle the explosion when the cannonball collides
                 CannonBall explosionScript = cannon.AddComponent<CannonBall>();
@@ -106,11 +106,11 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     }
     private bool IsTargetInRange()
     {
-        return Vector3.Distance(transform.position, targetEnemy.position) <= range;
+        return Vector3.Distance(transform.position, targetEnemy.position) <= explosionRadius;
     }
     private void FindNewTarget()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in hitColliders)
         {
             if (collider.CompareTag("Enemy"))
