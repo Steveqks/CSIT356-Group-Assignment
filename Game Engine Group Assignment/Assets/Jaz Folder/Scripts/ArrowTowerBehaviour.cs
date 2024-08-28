@@ -103,7 +103,7 @@ public class ArrowTowerBehaviour : MonoBehaviour
 
     private IEnumerator shootProjectile(Transform enemy)
     {
-        if (enemy != null && IsTargetInRange())
+        if (enemy != null)
         {
             if (arrowPrefab != null && arrowStart != null)
             {
