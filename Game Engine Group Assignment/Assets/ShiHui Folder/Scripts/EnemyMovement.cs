@@ -52,6 +52,7 @@ public class EnemyMovement : MonoBehaviour
 			return;
 		}
 
+		// get the target waypoint 
 		target = WayPoints.waypoints[currentWaypoint];
 		agent.SetDestination(target.position);
 
@@ -59,13 +60,15 @@ public class EnemyMovement : MonoBehaviour
 		Vector3 acceleration = steeringForce / mass;
 
 		currentVelocity += acceleration * Time.deltaTime;
-		currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed);
+		// prevent move too fast
+		currentVelocity = Vector3.ClampMagnitude(currentVelocity, maxSpeed); 
 
 		transform.position += currentVelocity * Time.deltaTime;
 		agent.velocity = currentVelocity;
 
 		if (currentVelocity != Vector3.zero)
 		{
+			// set the direction 
 			transform.rotation = Quaternion.LookRotation(agent.velocity);
 		}
 		currentWaypoint++;
