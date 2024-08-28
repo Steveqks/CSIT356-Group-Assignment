@@ -7,9 +7,10 @@ public class GatlingTowerBehaviour : MonoBehaviour
 
     public GameObject arrowPrefab;
     public Transform arrowStart;
-   // public float fireRate = 1.0f;
+    public float fireRate = 1.0f;
     public float range = 10.0f;
     public float lifetime = 3.0f;
+
 
     bool canShoot = true;
 
@@ -18,12 +19,16 @@ public class GatlingTowerBehaviour : MonoBehaviour
     private MeshRenderer showRangeMeshRenderer;
     private Transform targetEnemy;
 
+    private AudioSource rapidFireSFX;
+
     // Start is called before the first frame update
     void Start()
     {
         //fireTimer = fireRate;
 
         Transform meshRendTransform = transform.Find("showRange");
+
+        rapidFireSFX = GetComponent<AudioSource>();
 
         if (meshRendTransform != null)
         {
@@ -58,7 +63,13 @@ public class GatlingTowerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fireTimer += Time.deltaTime;
+        //fireTimer += Time.deltaTime;
+
+        if (targetEnemy != null)
+        {
+            Debug.Log("Distance to target: " + Vector3.Distance(transform.position, targetEnemy.position));
+            Debug.Log("Range: " + range);
+        }
 
         if (canShoot)
         {
@@ -68,12 +79,28 @@ public class GatlingTowerBehaviour : MonoBehaviour
             }
             if (targetEnemy != null)
             {
-                shootProjectile(targetEnemy);
+                StartCoroutine(shootProjectile(targetEnemy));
                 canShoot = false;
             }
         }
     }
-    private void shootProjectile(Transform enemy)
+    /*    private void shootProjectile(Transform enemy)
+        {
+            if (arrowPrefab != null && arrowStart != null)
+            {
+                GameObject arrow = Instantiate(arrowPrefab, arrowStart.position, Quaternion.identity);
+                arrow.transform.LookAt(enemy.position);
+                Vector3 direction = (enemy.position - arrowStart.position).normalized;
+                arrow.GetComponent<Rigidbody>().velocity = direction * range;
+                Destroy(arrow, lifetime);
+
+                if (rapidFireSFX != null)
+                {
+                    rapidFireSFX.Play();
+                }
+            }
+        }*/
+    private IEnumerator shootProjectile(Transform enemy)
     {
         if (arrowPrefab != null && arrowStart != null)
         {
@@ -82,8 +109,16 @@ public class GatlingTowerBehaviour : MonoBehaviour
             Vector3 direction = (enemy.position - arrowStart.position).normalized;
             arrow.GetComponent<Rigidbody>().velocity = direction * range;
             Destroy(arrow, lifetime);
+
+            if (rapidFireSFX != null)
+            {
+                rapidFireSFX.Play();  // Play the shooting sound effect
+            }
         }
+        yield return new WaitForSeconds(fireRate);
+        canShoot = true;
     }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Enemy"))

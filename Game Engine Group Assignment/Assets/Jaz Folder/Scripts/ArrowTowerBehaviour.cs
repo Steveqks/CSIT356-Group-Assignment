@@ -12,7 +12,6 @@ public class ArrowTowerBehaviour : MonoBehaviour
     public float range = 10.0f;
     public float lifetime = 3.0f;
 
-
     private float fireTimer;
     private Rigidbody rb;
 
@@ -20,8 +19,9 @@ public class ArrowTowerBehaviour : MonoBehaviour
 
     private MeshRenderer showRangeMeshRenderer;
     private Transform targetEnemy;
+    private AudioSource shootArrowSFX;
 
-  
+
     /*    private void Start()
         {
             fireTimer = fireRate;
@@ -30,6 +30,7 @@ public class ArrowTowerBehaviour : MonoBehaviour
     {
         Transform meshRendTransform = transform.Find("showRange");
         
+        shootArrowSFX = GetComponent<AudioSource>();
 
         if (meshRendTransform != null)
         {
@@ -100,13 +101,21 @@ public class ArrowTowerBehaviour : MonoBehaviour
 
     private IEnumerator shootProjectile(Transform enemy)
     {
-        if (arrowPrefab != null && arrowStart != null)
+        if (enemy != null && IsTargetInRange())
         {
-            GameObject arrow = Instantiate(arrowPrefab, arrowStart.position, Quaternion.identity);
-            arrow.transform.LookAt(enemy.position);
-            Vector3 direction = (enemy.position - arrowStart.position).normalized;
-            arrow.GetComponent<Rigidbody>().velocity = direction * range;
-            Destroy(arrow, lifetime);
+            if (arrowPrefab != null && arrowStart != null)
+            {
+                GameObject arrow = Instantiate(arrowPrefab, arrowStart.position, Quaternion.identity);
+                arrow.transform.LookAt(enemy.position);
+                Vector3 direction = (enemy.position - arrowStart.position).normalized;
+                arrow.GetComponent<Rigidbody>().velocity = direction * range;
+                Destroy(arrow, lifetime);
+
+                if (shootArrowSFX != null)
+                {
+                    shootArrowSFX.Play();  // Play the shooting sound effect
+                }
+            }
         }
         yield return new WaitForSeconds(fireRate);
         canShoot = true;

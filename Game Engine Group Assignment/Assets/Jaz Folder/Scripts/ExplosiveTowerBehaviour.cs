@@ -23,27 +23,36 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
 
     private MeshRenderer showRangeMeshRenderer;
     private Transform targetEnemy;
+    private AudioSource cannonBallSFX;
 
     /*    public float throwCooldown = 1.0f;
         private float lastThrowTime = 0f;*/
     private IEnumerator shootProjectile(Transform enemy)
     {
-        if (cannonPrefab != null && cannonStart != null)
+        if (enemy != null && IsTargetInRange())
         {
-            GameObject cannon = Instantiate(cannonPrefab, cannonStart.position, Quaternion.identity);
-            cannon.transform.LookAt(enemy.position);
-            Vector3 direction = (enemy.position - cannonStart.position).normalized;
+            if (cannonPrefab != null && cannonStart != null)
+            {
+                GameObject cannon = Instantiate(cannonPrefab, cannonStart.position, Quaternion.identity);
+                cannon.transform.LookAt(enemy.position);
+                Vector3 direction = (enemy.position - cannonStart.position).normalized;
 
-            Rigidbody cannonBall = cannon.GetComponent<Rigidbody>();
-            cannonBall.velocity = direction * range;
+                Rigidbody cannonBall = cannon.GetComponent<Rigidbody>();
+                cannonBall.velocity = direction * range;
 
-            // Add a script to handle the explosion when the cannonball collides
-            CannonBall explosionScript = cannon.AddComponent<CannonBall>();
-            explosionScript.explosionRadius = explosionRadius;
-            explosionScript.explosionDamage = explosionDamage;
-            explosionScript.particleSysPrefab = particleSysPrefab;
+                // Add a script to handle the explosion when the cannonball collides
+                CannonBall explosionScript = cannon.AddComponent<CannonBall>();
+                explosionScript.explosionRadius = explosionRadius;
+                explosionScript.explosionDamage = explosionDamage;
+                explosionScript.particleSysPrefab = particleSysPrefab;
 
-            Destroy(cannon, lifetime);
+                Destroy(cannon, lifetime);
+
+                if (cannonBall != null)
+                {
+                    cannonBallSFX.Play();
+                }
+            }
         }
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
@@ -66,6 +75,8 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
     private void Start()
     {
         Transform meshRendTransform = transform.Find("showRange");
+
+        cannonBallSFX = GetComponent<AudioSource>();
 
         if (meshRendTransform != null)
         {
