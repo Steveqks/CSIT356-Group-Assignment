@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 {
 	[SerializeField] public int health = 100;
     [SerializeField] public int reward;
+
     private NavMeshAgent agent;
 	private Renderer renderer;
 	
@@ -26,7 +27,14 @@ public class Enemy : MonoBehaviour
 		AIR
 	}
 
-	public EnemyType enemyType;
+    public enum EnemySpeedType
+    {
+        FAST,
+        SLOW
+    }
+
+    public EnemyType enemyType;
+    public EnemySpeedType enemySpeedType;
 
 	private void Start()
 	{
@@ -47,7 +55,16 @@ public class Enemy : MonoBehaviour
 		{
 			reward = 2;
 		}
-	}
+
+        if (enemySpeedType == EnemySpeedType.FAST)
+        {
+            agent.speed = 5;
+        }
+        else if (enemySpeedType == EnemySpeedType.SLOW)
+        {
+			agent.speed = 3.5f;
+        }
+    }
 
 	private void Update()
 	{
