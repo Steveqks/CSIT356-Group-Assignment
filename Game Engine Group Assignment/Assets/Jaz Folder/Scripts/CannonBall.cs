@@ -29,13 +29,6 @@ public class CannonBall : MonoBehaviour
         {
             Enemy enemy = hitCollider.GetComponent<Enemy>();
             
-            // from steve
-            Rigidbody rb = hitCollider.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.AddExplosionForce(20.0f, transform.position, 10.0f, 3.0f, ForceMode.Impulse);
-            }
-
             if (hitCollider.CompareTag("Enemy"))
             {
                 enemyType = hitCollider.gameObject.GetComponent<Enemy>();
@@ -44,6 +37,12 @@ public class CannonBall : MonoBehaviour
                 {
                     if (enemyType.enemyType == Enemy.EnemyType.GROUND)
                     {
+                        // from steve
+                        Rigidbody rb = hitCollider.GetComponent<Rigidbody>();
+                        if (rb != null)
+                        {
+                            rb.AddExplosionForce(20.0f, transform.position, 10.0f, 3.0f, ForceMode.Impulse);
+                        }
                         enemy.Damage(explosionDamage);
                     }
                 }
