@@ -15,11 +15,10 @@ public class Enemy : MonoBehaviour
     private GameObject obj;
     private PlayerStatus ps;
     
-
 	public ParticleSystem blood;
-	Animator animator;
+	private Animator animator;
 
-	Vector3 bloodPos;
+	private Vector3 bloodPos;
 
     public enum EnemyType
 	{
@@ -43,7 +42,8 @@ public class Enemy : MonoBehaviour
 		if (enemyType == EnemyType.GROUND)
 		{
 			reward = 1;
-		} else if (enemyType == EnemyType.AIR)
+		} 
+		else if (enemyType == EnemyType.AIR)
 		{
 			reward = 2;
 		}
@@ -70,15 +70,11 @@ public class Enemy : MonoBehaviour
 		{
 			// change color 
 			renderer.material.color = Color.red;
-            renderer.material.SetColor("_EmissionColor", Color.red * 5.0f);
-            renderer.material.EnableKeyword("_EMISSION");
             agent.speed = 8;
 		}
 		else if (health <= 50)
 		{
             // change color 
-            renderer.material.SetColor("_EmissionColor", Color.yellow * 5.0f);
-            renderer.material.EnableKeyword("_EMISSION");
             renderer.material.color = Color.yellow;
 		}
 	}
