@@ -20,6 +20,8 @@ public class PlayerStatus : MonoBehaviour
     private GameObject playerMoneyTMP;
     private TMP_Text textMoney;
 
+    private bool gameover = false;
+
     // cheat code "AARONYAGER"
     private readonly List<KeyCode> targetSequence = new List<KeyCode>
     {
@@ -85,16 +87,18 @@ public class PlayerStatus : MonoBehaviour
 
     public void takeDamage(int value)
     {
-        playerLives -= value;
-        textLives.text = playerLives.ToString();
-
-        if (playerLives <= 0)
+        if (playerLives != 0)
         {
-            SceneManager.LoadScene("Game Over Scene");
-            //game over scene is loaded
+            playerLives -= value;
+            textLives.text = playerLives.ToString();
+        }
+        
 
-            //game over sfx
-            GameOverSfx.Play();
+        if (playerLives == 0 && gameover == false)
+        {
+            gameover = true;
+            // gameover music + change scene
+            StartCoroutine(GameOver());
         }
     }
 
@@ -180,6 +184,13 @@ public class PlayerStatus : MonoBehaviour
         return KeyCode.None;
     }
 
-    
+    IEnumerator GameOver()
+    {
+        GameOverSfx.Play();
+        yield return new WaitForSeconds(3);
+
+        SceneManager.LoadScene("Game Over Scene");
+        //game over scene is loaded
+    }
 
 }
