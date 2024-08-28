@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
-using Unity.PlasticSCM.Editor.WebApi;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class TileInfoOptionController : MonoBehaviour
