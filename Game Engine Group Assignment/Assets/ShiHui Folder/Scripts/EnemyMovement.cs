@@ -22,17 +22,14 @@ public class EnemyMovement : MonoBehaviour
 	public float mass = 1.0f;
 	private Vector3 currentVelocity = Vector3.zero;
 
-
 	private void Start()
 	{
-
 		agent = GetComponent<NavMeshAgent>();
 		target = WayPoints.waypoints[currentWaypoint];
 		totalWaypoint = WayPoints.waypoints.Count;
 		
         obj = GameObject.FindGameObjectWithTag("PlayerStatus");
         ps = obj.GetComponent<PlayerStatus>();
-        
 	}
 
 	private void Update()
