@@ -120,7 +120,7 @@ public class ExplosiveTowerBehaviour : MonoBehaviour
             {
                 FindNewTarget();
             }
-            if (targetEnemy != null)
+            if (targetEnemy != null && IsTargetInRange())
             {
                 StartCoroutine(shootProjectile(targetEnemy));
                 canShoot = false;
