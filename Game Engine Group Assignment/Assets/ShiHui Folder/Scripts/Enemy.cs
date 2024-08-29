@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
 
 		animator = GetComponent<Animator>();
 		halfHealth = health / 2;
-        Debug.Log("half health: " + halfHealth);
+        //Debug.Log("half health: " + halfHealth);
     }
 
 	private void Update()
